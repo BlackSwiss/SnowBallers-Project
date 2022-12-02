@@ -5,10 +5,6 @@ using UnityEngine.XR;
 
 public class HMDInfoManager : MonoBehaviour
 {
-
-    //TURN THIS OBJECT ON IF YOU WANT KEYBOARD CONTORLS IN THIS SCENE
-    public GameObject HMDSimulator;
-    //public bool keyboardControls;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,15 +28,6 @@ public class HMDInfoManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Debug.Log("Turned on Keyboard Controls!");
-            turnonKeyboardControls();
-        }
-    }
-
-    void turnonKeyboardControls()
-    {
-        HMDSimulator.SetActive(true);
+        
     }
 }
