@@ -21,9 +21,12 @@ MonoBehaviour:
   m_ShowMode: 4
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Title: Game
   m_RootView: {fileID: 6}
 =======
+=======
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
   m_Title: Inspector
@@ -349,6 +352,7 @@ MonoBehaviour:
     y: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 912.8
     height: 457.6
   m_MinSize: {x: 202, y: 221}
@@ -361,6 +365,8 @@ MonoBehaviour:
   m_Selected: 0
   m_LastSelected: 2
 =======
+=======
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
     width: 262
@@ -427,6 +433,9 @@ MonoBehaviour:
   m_Selected: 1
   m_LastSelected: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 28631fb (Made the box a snowball)
+=======
 >>>>>>> parent of 28631fb (Made the box a snowball)
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
@@ -452,11 +461,14 @@ MonoBehaviour:
     serializedVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 303.2
     y: 73.6
     width: 919.60004
     height: 421.4
 =======
+=======
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
     x: 518
@@ -476,7 +488,11 @@ MonoBehaviour:
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_TargetSize: {x: 919.60004, y: 400.4}
+=======
+  m_TargetSize: {x: 702, y: 528}
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
   m_TargetSize: {x: 702, y: 528}
 >>>>>>> parent of 28631fb (Made the box a snowball)
@@ -499,11 +515,14 @@ MonoBehaviour:
     vZoomLockedByDefault: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_HBaseRangeMin: -367.84003
     m_HBaseRangeMax: 367.84003
     m_VBaseRangeMin: -160.16
     m_VBaseRangeMax: 160.16
 =======
+=======
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
     m_HBaseRangeMin: -351
@@ -530,6 +549,7 @@ MonoBehaviour:
       y: 21
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       width: 919.60004
       height: 400.4
     m_Scale: {x: 1, y: 1}
@@ -537,11 +557,16 @@ MonoBehaviour:
 =======
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
+=======
+>>>>>>> parent of 28631fb (Made the box a snowball)
       width: 702
       height: 528
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 351, y: 264}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 28631fb (Made the box a snowball)
+=======
 >>>>>>> parent of 28631fb (Made the box a snowball)
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
@@ -551,6 +576,7 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       x: -459.80002
@@ -563,6 +589,8 @@ MonoBehaviour:
 =======
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
+=======
+>>>>>>> parent of 28631fb (Made the box a snowball)
       x: -351
       y: -264
       width: 702
@@ -571,6 +599,9 @@ MonoBehaviour:
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 702, y: 549}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 28631fb (Made the box a snowball)
+=======
 >>>>>>> parent of 28631fb (Made the box a snowball)
 =======
 >>>>>>> parent of 28631fb (Made the box a snowball)
@@ -823,7 +854,11 @@ MonoBehaviour:
       m_LastClickedID: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_ExpandedIDs: 2cfbffff
+=======
+      m_ExpandedIDs: 0c95ffff6095ffff3a98ffff5298ffff6898ffff8898ffff2ea2fffff6a3fffff8aaffffc4adffff68b0ffffbcb0ffff9ab3ffffb6b3ffffd0b3fffff4b3ffff24b6ffff34b9ffff3ebaffff92baffff6cbdffff86bdffff9cbdffffbcbdffff1acbffff82cbffffb8cdffff4ed1ffff90d2ffff8ce9ffffc0ebffff1cf2ffffe0f6ffffb6f7ffff58f9ffffeef9ffff2afbffffde6d0000ea6d00006c6e0000ca780000e4780000f6780000
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
       m_ExpandedIDs: 0c95ffff6095ffff3a98ffff5298ffff6898ffff8898ffff2ea2fffff6a3fffff8aaffffc4adffff68b0ffffbcb0ffff9ab3ffffb6b3ffffd0b3fffff4b3ffff24b6ffff34b9ffff3ebaffff92baffff6cbdffff86bdffff9cbdffffbcbdffff1acbffff82cbffffb8cdffff4ed1ffff90d2ffff8ce9ffffc0ebffff1cf2ffffe0f6ffffb6f7ffff58f9ffffeef9ffff2afbffffde6d0000ea6d00006c6e0000ca780000e4780000f6780000
 >>>>>>> parent of 28631fb (Made the box a snowball)
@@ -1120,9 +1155,15 @@ MonoBehaviour:
   m_Position:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: -0.87093306, y: 0.104783446, z: 5.854999}
     speed: 2
     m_Value: {x: -0.87093306, y: 0.104783446, z: 5.854999}
+=======
+    m_Target: {x: 0, y: 0, z: 0}
+    speed: 2
+    m_Value: {x: 0, y: 0, z: 0}
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
     m_Target: {x: 0, y: 0, z: 0}
     speed: 2
@@ -1181,6 +1222,7 @@ MonoBehaviour:
   m_Rotation:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 0.18951564, y: -0.18259948, z: 0.03589703, w: 0.9640843}
     speed: 2
     m_Value: {x: 0.18951507, y: -0.18259893, z: 0.035896923, w: 0.96408147}
@@ -1188,6 +1230,15 @@ MonoBehaviour:
     m_Target: 4.2587447
     speed: 2
     m_Value: 4.2587447
+=======
+    m_Target: {x: -0.23252976, y: -0.105677545, z: 0.025422504, w: -0.9665018}
+    speed: 2
+    m_Value: {x: -0.23252863, y: -0.10567703, z: 0.02542238, w: -0.96649706}
+  m_Size:
+    m_Target: 2.63086
+    speed: 2
+    m_Value: 2.63086
+>>>>>>> parent of 28631fb (Made the box a snowball)
 =======
     m_Target: {x: -0.23252976, y: -0.105677545, z: 0.025422504, w: -0.9665018}
     speed: 2
