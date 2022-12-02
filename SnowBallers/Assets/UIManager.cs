@@ -5,7 +5,7 @@ using UnityEngine;
 public static class UIManager
 {
     public static bool IsInitialized { get; private set; }
-    public static GameObject mainMenu, onlineMenu, optionsMenu;
+    public static GameObject mainMenu, onlineMenu, optionsMenu, lobbyMenu;
 
     public static void Init()
     {
@@ -13,6 +13,7 @@ public static class UIManager
         mainMenu = canvas.transform.Find("MainMenu").gameObject;
         onlineMenu = canvas.transform.Find("OnlineMenu").gameObject;
         optionsMenu = canvas.transform.Find("OptionsMenu").gameObject;
+        lobbyMenu = canvas.transform.Find("LobbyMenu").gameObject;
 
         IsInitialized = true;
     }
@@ -34,7 +35,7 @@ public static class UIManager
                 optionsMenu.SetActive(true);
                 break;
             case Menu.LOBBY_MENU:
-                optionsMenu.SetActive(true);
+                lobbyMenu.SetActive(true);
                 break;
         }
 
