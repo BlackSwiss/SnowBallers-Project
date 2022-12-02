@@ -32,6 +32,7 @@ public class NetworkPlayer : MonoBehaviour
         {
             foreach (var item in GetComponentsInChildren<Renderer>())
             {
+                Debug.Log("Item: " + item.name);
                 item.enabled = false;
             }
         }
