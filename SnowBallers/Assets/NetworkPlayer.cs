@@ -19,9 +19,13 @@ public class NetworkPlayer : MonoBehaviour
     private Transform leftHandRig;
     private Transform rightHandRig;
 
+    public Health playerHealth;
+
     // Start is called before the first frame update
     void Start()
     {
+        const float startingHP = 100;
+        playerHealth = new Health(startingHP);
         photonView = GetComponent<PhotonView>();
         XROrigin rig = FindObjectOfType<XROrigin>();
         headRig = rig.transform.Find("Camera Offset/Main Camera");
