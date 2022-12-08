@@ -14,8 +14,9 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void decreaseHealth(float amount) {
+    public void decreaseHealth(float amount) {
         currentHealth -= amount;
+        Debug.Log("Current player health: " + currentHealth);
         //run animation for damage
     }
 }

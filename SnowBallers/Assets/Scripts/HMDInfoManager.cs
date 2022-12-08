@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.InputSystem;
 
 public class HMDInfoManager : MonoBehaviour
 {
     // Start is called before the first frame update
     //TURN THIS OBJECT ON IF YOU WANT KEYBOARD CONTORLS IN THIS SCENE
     public GameObject HMDSimulator;
+    public GameObject Controller;
     void Start()
     {
         Debug.Log("Is device active: " + XRSettings.isDeviceActive);
@@ -35,10 +37,20 @@ public class HMDInfoManager : MonoBehaviour
             Debug.Log("Turned on Keyboard Controls!");
             turnonKeyboardControls();
         }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Debug.Log("Turned on Gamepad Controls!");
+            turnonGamepadControls();
+        }
     }
 
     void turnonKeyboardControls()
     {
         HMDSimulator.SetActive(true);
+    }
+
+    void turnonGamepadControls()
+    {
+        Controller.SetActive(true);
     }
 }
