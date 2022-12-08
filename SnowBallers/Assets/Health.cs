@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float health;
+    public float maxHealth = 10;
+    public float currentHealth;
 
-    public Health(float health) {
-        this.health = health;
+    public Animator animate;
+
+    // Start is called before the first frame update
+    void Start() {
+        currentHealth = maxHealth;
     }
 
-    public void setHealth(float health) {
-        this.health = health;        
-    }
-
-    public float getHealth() {
-        return health;
-    }
-
-    public void decreaseHealth(float health) {
-        this.health -= health;
+    void decreaseHealth(float amount) {
+        currentHealth -= amount;
+        //run animation for damage
     }
 }
