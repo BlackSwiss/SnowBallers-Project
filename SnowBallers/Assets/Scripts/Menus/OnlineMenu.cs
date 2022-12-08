@@ -13,4 +13,9 @@ public class OnlineMenu : MonoBehaviour
     {
         UIManager.OpenMenu(Menu.LOBBY_MENU, gameObject);
     }
+
+    public void OnClickBack()
+    {
+        UIManager.OpenMenu(Menu.MAIN_MENU, gameObject);
+    }
 }
