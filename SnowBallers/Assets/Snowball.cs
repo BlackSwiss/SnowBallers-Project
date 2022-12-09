@@ -10,7 +10,14 @@ public class Snowball : MonoBehaviour
         {
             Debug.Log("Player hit!");
             collision.gameObject.GetComponent<Health>().decreaseHealth(1);
-            collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
+            if(collision.gameObject.GetComponent<ChangeColor>())
+                collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
+
+            foreach (Transform c in transform)
+            {
+                c.gameObject.GetComponent<ParticleSystem>().Play();
+            }
+
         }
     }
 }
