@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
-  animate: {fileID: 0}
+  animate: {fileID: 5025305916862865238}
 --- !u!1001 &391321209416084506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -561,6 +561,26 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.36371028
   m_Center: {x: 1.2972061e-11, y: 1.4223864, z: 0.0063800216}
+--- !u!95 &5025305916862865238
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336808661146430348}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 825dd78347b0cb14eb708f7ecb723f26, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &732417274322924785
 MonoBehaviour:
   m_ObjectHideFlags: 0
