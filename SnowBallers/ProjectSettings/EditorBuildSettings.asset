@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Vr Test.unity
     guid: bbfb77c0eb3a61d4f816a4752ec40071
   - enabled: 1
+    path: Assets/Scenes/Level Design Test.unity
+    guid: cae9b52767602434cb8a721cd893c87a
+  - enabled: 1
     path: Assets/Scenes/Vr Test 2.unity
     guid: bda5fa5ae1d559649bdcc893b8d2580c
   - enabled: 1
