@@ -10,8 +10,9 @@ public class Snowball : MonoBehaviour
         {
             Debug.Log("Player hit!");
             collision.gameObject.GetComponent<Health>().decreaseHealth(1);
-            if(collision.gameObject.GetComponent<ChangeColor>())
-                collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
+            //if(collision.gameObject.GetComponent<ChangeColor>())
+            //collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
+            collision.gameObject.GetComponent<Health>().hitAnimation();
 
             foreach (Transform c in transform)
             {

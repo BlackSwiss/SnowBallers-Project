@@ -19,4 +19,15 @@ public class Health : MonoBehaviour
         Debug.Log("Current player health: " + currentHealth);
         //run animation for damage
     }
+
+
+    public void hitAnimation()
+    {
+        animate.SetBool("isHit", true);
+    }
+
+    public void stopHitAnimation()
+    {
+        animate.SetBool("isHit", false);
+    }
 }
