@@ -6,6 +6,14 @@ public class Snowball : MonoBehaviour
 {
     public AudioSource bonk;
     public AudioSource dizzy;
+
+    public Transform initialPos;
+    private void Start()
+    {
+        initialPos = gameObject.transform;        
+    }
+
+
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -24,6 +32,14 @@ public class Snowball : MonoBehaviour
             bonk.Play();
             dizzy.Play();
 
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gameObject.transform.position = initialPos.position;
         }
     }
 }
