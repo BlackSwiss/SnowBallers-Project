@@ -10,7 +10,8 @@ public class ScoreUI : MonoBehaviour
 
     void Start()
     {
-        scoreKeeper.AddScore(new Score("testplayer", 1));
+        scoreKeeper.AddScore(new Score("test1", 10));
+        scoreKeeper.AddScore(new Score("test2", 6));
 
         var scores = scoreKeeper.GetHighScores().ToArray();
         for (int i = 0; i < scores.Length; i++)
