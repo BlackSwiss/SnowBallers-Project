@@ -604,6 +604,7 @@ MonoBehaviour:
   bonk: {fileID: 1116581966}
   dizzy: {fileID: 864638273}
   initialPos: {x: 0, y: 0, z: 0}
+  ownersID: 0
 --- !u!1001 &207117940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -868,6 +869,7 @@ GameObject:
   - component: {fileID: 296255782}
   - component: {fileID: 296255783}
   - component: {fileID: 296255784}
+  - component: {fileID: 296255785}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Player
@@ -1023,6 +1025,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &296255785
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296255776}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &296514372
 GameObject:
   m_ObjectHideFlags: 0
