@@ -22,8 +22,11 @@ public class Snowball : MonoBehaviour
         {
             Debug.Log("Player hit!");
             //This will prevent a snowball that no one threw to do damage
-            if(ownersID != 0)
+            if (ownersID != 0)
+            {
                 ScoreEvents.current.playerHit(ownersID);
+                Debug.Log("Hit");
+            }
 
             if (collision.gameObject.GetComponent<Health>())
             {
