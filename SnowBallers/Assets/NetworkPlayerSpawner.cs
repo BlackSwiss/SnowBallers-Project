@@ -7,6 +7,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 {
 
     private GameObject spawnedPlayerPrefab;
+    public GameObject scoreManager;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         spawnedPlayerPrefab = PhotonNetwork.Instantiate("Network Player", transform.position, transform.rotation);
+        scoreManager.GetComponent<ScoreManager>().addPlayerToScore(spawnedPlayerPrefab);
     }
 
     public override void OnLeftRoom()
