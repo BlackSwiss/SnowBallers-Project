@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
 
 public class Snowball : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Snowball : MonoBehaviour
     public AudioSource dizzy;
 
     public Vector3 initialPos;
+
+    public int ownersID = 0;
+
     private void Start()
     {
         initialPos = gameObject.transform.position;        
@@ -17,13 +21,19 @@ public class Snowball : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             Debug.Log("Player hit!");
+            //This will prevent a snowball that no one threw to do damage
+            if(ownersID != 0)
+                ScoreEvents.current.playerHit(ownersID);
+
             if (collision.gameObject.GetComponent<Health>())
-                collision.gameObject.GetComponent<Health>().decreaseHealth(1);
-            //if(collision.gameObject.GetComponent<ChangeColor>())
-            if(collision.gameObject.GetComponent<ChangeColor>())
-                collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
-            if (collision.gameObject.GetComponent<Health>())
+            {
+                //collision.gameObject.GetComponent<Health>().decreaseHealth(1);
                 collision.gameObject.GetComponent<Health>().hitAnimation();
+            }
+            //if(collision.gameObject.GetComponent<ChangeColor>())
+            if (collision.gameObject.GetComponent<ChangeColor>())
+                collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
+                
 
             foreach (Transform c in transform)
             {
@@ -42,5 +52,11 @@ public class Snowball : MonoBehaviour
         {
             gameObject.transform.position = initialPos;
         }
+
+        //If snowball gets owned by another player, we will assign the owner id to that players
+        if(GetComponent<Photon.Pun.PhotonView>().OwnerActorNr != ownersID)
+            ownersID =  GetComponent<Photon.Pun.PhotonView>().OwnerActorNr;
     }
+
+
 }

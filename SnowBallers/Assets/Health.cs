@@ -15,9 +15,13 @@ public class Health : MonoBehaviour
     }
 
     public void decreaseHealth(float amount) {
-        currentHealth -= amount;
-        Debug.Log("Current player health: " + currentHealth);
+        //Old Healh decrease code
+        //currentHealth -= amount;
+        //Debug.Log("Current player health: " + currentHealth);
         //run animation for damage
+
+        //New Health with just score code
+
     }
 
 

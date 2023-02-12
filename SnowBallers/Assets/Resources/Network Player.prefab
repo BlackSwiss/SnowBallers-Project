@@ -326,6 +326,7 @@ MonoBehaviour:
   rightHand: {fileID: 93393338082314473}
   leftHandAnimator: {fileID: 4368565114501109302}
   rightHandAnimator: {fileID: 8607686691686002425}
+  playerID: 0
 --- !u!114 &7922432587316939414
 MonoBehaviour:
   m_ObjectHideFlags: 0
