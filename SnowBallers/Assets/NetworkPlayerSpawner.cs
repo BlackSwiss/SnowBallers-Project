@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
 using Photon.Pun;
 
 public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
@@ -37,6 +39,12 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
+        PhotonNetwork.LoadLevel(0); 
         PhotonNetwork.Destroy(spawnedPlayerPrefab);
+    }
+
+    public void LeaveRoom() 
+    {
+        PhotonNetwork.LeaveRoom();
     }
 }
