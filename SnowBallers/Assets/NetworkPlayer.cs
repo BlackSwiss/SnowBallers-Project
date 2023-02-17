@@ -10,14 +10,17 @@ public class NetworkPlayer : MonoBehaviour
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
+    public Transform body;
     private PhotonView photonView;
 
     public Animator leftHandAnimator;
     public Animator rightHandAnimator;
+    public Animator bodyAnimator;
 
     private Transform headRig;
     private Transform leftHandRig;
     private Transform rightHandRig;
+    private Transform bodyRig;
 
     public int playerID;
 
@@ -29,6 +32,7 @@ public class NetworkPlayer : MonoBehaviour
         headRig = rig.transform.Find("Camera Offset/Main Camera");
         leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
         rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
+        bodyRig = rig.transform.Find("Camera Offset/Body");
 
         if (photonView.IsMine)
         {
@@ -51,9 +55,11 @@ public class NetworkPlayer : MonoBehaviour
             MapPosition(head, headRig);
             MapPosition(leftHand, leftHandRig);
             MapPosition(rightHand, rightHandRig);
+            MapPosition(body, bodyRig);
 
             UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.LeftHand), leftHandAnimator);
             UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.RightHand), rightHandAnimator);
+            UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.LeftHand), bodyAnimator);
         }
 
     }
@@ -85,6 +91,19 @@ public class NetworkPlayer : MonoBehaviour
         {
             handAnimator.SetFloat("Grip", 0);
 
+        }
+    }
+
+    void UpdateBodyAnimation(InputDevice targetDevice, Animator bodyAnimator)
+    {
+        if(targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 moveVector))
+        {
+            Debug.Log("Network player moving!");
+            bodyAnimator.SetBool("isMove", true);
+        }
+        else
+        {
+            bodyAnimator.SetBool("isMove", false);
         }
     }
 }
