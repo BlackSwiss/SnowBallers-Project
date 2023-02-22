@@ -34,6 +34,8 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
         //Add their score to the scoreboard in game
         scoreManager.GetComponent<ScoreManager>().addPlayerToScore(spawnedPlayerPrefab);
+
+        Debug.Log("Added score to scoreboard");
     }
 
     public override void OnLeftRoom()

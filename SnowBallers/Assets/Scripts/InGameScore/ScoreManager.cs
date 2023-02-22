@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
+using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviourPun
 {
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> playerScores = new List<GameObject>();
-    public GameObject Canvas;
+    public GameObject ScoreHolder;
 
 
     // Start is called before the first frame update
@@ -16,15 +18,18 @@ public class ScoreManager : MonoBehaviour
         ScoreEvents.current.onPlayerHit += incrementScore;
     }
 
-
-
+    [PunRPC]
     public void addPlayerToScore(GameObject player)
     {
         //Add player to our list of players (might get rid of this)
         players.Add(player);
 
         //Create the player score on scoreboard and add it to list of scores
-        GameObject playerScore = Instantiate(Resources.Load("Player Score") as GameObject, Canvas.transform);
+        GameObject playerScore = PhotonNetwork.Instantiate("Player Score",transform.position,transform.rotation);
+        //Set the parent of the score to the scoreholder
+        //playerScore.transform.SetParent(ScoreHolder.transform,false);
+        playerScore.GetPhotonView().RPC("setParentPhoton", RpcTarget.AllBuffered, "Score Holder");
+        Debug.Log("RPC Called");
         playerScores.Add(playerScore);
 
         //Add the player id to this specific score listing 
