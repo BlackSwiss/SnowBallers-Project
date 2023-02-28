@@ -14,14 +14,11 @@ public static class UIManager
         onlineMenu = canvas.transform.Find("OnlineMenu").gameObject;
         optionsMenu = canvas.transform.Find("OptionsMenu").gameObject;
         lobbyMenu = canvas.transform.Find("LobbyMenu").gameObject;
-
-        IsInitialized = true;
     }
 
     public static void OpenMenu(Menu menu, GameObject callingMenu)
     {
-        if (!IsInitialized)
-            Init();
+        Init();
 
         switch(menu)
         {

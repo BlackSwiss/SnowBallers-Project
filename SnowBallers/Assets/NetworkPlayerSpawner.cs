@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
+using Photon.Realtime;
 
 public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 {
@@ -38,11 +39,18 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         Debug.Log("Added score to scoreboard");
     }
 
+    public override void OnDisconnected(DisconnectCause cause) 
+    {
+        Debug.LogWarningFormat("Disconnected: {0}", cause);
+    }
+
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
-        PhotonNetwork.LoadLevel(0); 
         PhotonNetwork.Destroy(spawnedPlayerPrefab);
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.LoadLevel(0);
+        Debug.Log("Left room.");
     }
 
     public void LeaveRoom() 

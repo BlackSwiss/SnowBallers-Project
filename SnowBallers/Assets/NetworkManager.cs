@@ -76,4 +76,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("A new player joined the room");
         base.OnPlayerEnteredRoom(newPlayer);
     }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("Left the room");
+        base.OnLeftRoom();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer) 
+    {
+        Debug.Log("A player has left the room");
+        base.OnPlayerLeftRoom(otherPlayer);
+    }
 }
