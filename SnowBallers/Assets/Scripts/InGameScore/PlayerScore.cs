@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class PlayerScore : MonoBehaviour
+public class PlayerScore : MonoBehaviourPun
 {
     public GameObject scoreText;
     public int score = 0;
@@ -13,7 +13,8 @@ public class PlayerScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.GetComponent<TextMeshProUGUI>().text = "Player " + playerID + " Score: " + score.ToString();
+        //scoreText.GetComponent<TextMeshProUGUI>().text = "Player " + playerID + " Score: " + score.ToString();
+        GameObject.Find("Score Manager").GetComponent<ScoreManager>().playerScores.Add(gameObject);
     }
 
     // Update is called once per frame
@@ -22,9 +23,11 @@ public class PlayerScore : MonoBehaviour
         
     }
 
+    [PunRPC]
     public void syncPlayerID(int currentPlayerID)
     {
         playerID = currentPlayerID;
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Player " + playerID + " Score: " + score.ToString();
     }
 
     [PunRPC]

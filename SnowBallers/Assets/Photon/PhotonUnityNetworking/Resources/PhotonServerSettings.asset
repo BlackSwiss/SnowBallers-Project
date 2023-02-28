@@ -43,6 +43,9 @@ MonoBehaviour:
   - addPlayerToScore
   - setParentPhoton
   - rebuildLayout
+  - syncPlayerID
+  - addScoreToArray
+  - syncPlayerScoreList
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
