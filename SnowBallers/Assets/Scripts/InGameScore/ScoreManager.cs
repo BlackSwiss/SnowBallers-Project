@@ -27,16 +27,20 @@ public class ScoreManager : MonoBehaviourPun
         //Create the player score on scoreboard and add it to list of scores
         GameObject playerScore = PhotonNetwork.Instantiate("Player Score",transform.position,transform.rotation);
         //Set the parent of the score to the scoreholder
-        //playerScore.transform.SetParent(ScoreHolder.transform,false);
         playerScore.GetPhotonView().RPC("setParentPhoton", RpcTarget.AllBuffered, "Score Holder");
         Debug.Log("RPC Called");
+
         playerScores.Add(playerScore);
 
+        //Rebuild the layout group so our ui doesnt overlap
+        ScoreHolder.GetPhotonView().RPC("rebuildLayout", RpcTarget.AllBuffered);
+
         //Add the player id to this specific score listing 
-        playerScore.GetComponent<PlayerScore>().syncPlayerID(player.GetComponent<NetworkPlayer>().playerID);
+        //playerScore.GetComponent<PlayerScore>().syncPlayerID(player.GetComponent<NetworkPlayer>().playerID);
         
         
     }
+
 
     //Find and increment correct score
     public void incrementScore(int ownerID)
