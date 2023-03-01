@@ -48,18 +48,18 @@ public class ScoreManager : MonoBehaviourPun
     //Find and increment correct score
     public void incrementScore(int ownerID)
     {
-       
-        //foreach(GameObject playerScore in playerScores)
-        //{
-        //    PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
-        //    //If this player was the owner of the hit
-        //    if (scoreScript.playerID == ownerID)
-        //    {
-        //        Debug.Log("Someone hit, incrementing score to " + ownerID);
-        //        //Use the increment score script on object itself
-        //        scoreScript.incrementScore();
-        //    }
-        //}
+
+        foreach (GameObject playerScore in playerScores)
+        {
+            PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
+            //If this player was the owner of the hit
+            if (scoreScript.playerID == ownerID)
+            {
+                Debug.Log("Someone hit, incrementing score to " + ownerID);
+                //Use the increment score script on object itself
+                scoreScript.incrementScore();
+            }
+        }
     }
 
 
