@@ -18,12 +18,13 @@ public class BotAI : MonoBehaviour
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
-    public float RandomX, RandomZ;
+
 
     //States
     public float sightRange;
     public bool playerInSightRange;
 
+    //*issue* - want to grab players prefab
     private void Awake()
     {
         //player = GameObject.GetComponent<NetworkPlayer>().transform;
@@ -36,7 +37,6 @@ public class BotAI : MonoBehaviour
         playerInSightRange  = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
         if (!playerInSightRange)
-            Debug.Log("start dodging");
             Dodging();
     }
 
@@ -62,7 +62,7 @@ public class BotAI : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + RandomX, transform.position.y, transform.position.z + RandomZ);
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
         //Search for random point on map within bounds
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
