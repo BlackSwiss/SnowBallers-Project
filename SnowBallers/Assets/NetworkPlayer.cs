@@ -55,7 +55,11 @@ public class NetworkPlayer : MonoBehaviour
             MapPosition(head, headRig);
             MapPosition(leftHand, leftHandRig);
             MapPosition(rightHand, rightHandRig);
+<<<<<<< Updated upstream
             MapPosition(body, bodyRig);
+=======
+            
+>>>>>>> Stashed changes
 
             UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.LeftHand), leftHandAnimator);
             UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.RightHand), rightHandAnimator);
@@ -66,8 +70,6 @@ public class NetworkPlayer : MonoBehaviour
 
     void MapPosition(Transform target, Transform rigTransform)
     {
-
-
         target.position = rigTransform.position;
         target.rotation = rigTransform.rotation;
     }
