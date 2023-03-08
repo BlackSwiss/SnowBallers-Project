@@ -2315,13 +2315,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   body: {fileID: 4481225473091488}
   otherFoot: {fileID: 2363900473455544169}
   speed: 3
   stepDistance: 0.6
   stepLength: 0.6
-  stepHeight: 0.6
+  stepHeight: 0.5
   footPosOffset: {x: 0, y: 0, z: 0}
   footRotOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &3922524153447591413
@@ -2370,13 +2370,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   body: {fileID: 4481225473091488}
   otherFoot: {fileID: 7047737680752964372}
   speed: 3
   stepDistance: 0.6
   stepLength: 0.6
-  stepHeight: 0.6
+  stepHeight: 0.5
   footPosOffset: {x: 0, y: 0, z: 0}
   footRotOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &5712510398867545847

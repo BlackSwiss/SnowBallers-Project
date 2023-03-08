@@ -23,14 +23,16 @@ public class BotAI : MonoBehaviour
     public float sightRange;
     public bool playerInSightRange;
 
-    //IK_Character Model Animator
-    private Animator animator;
+    //IK_Character Model Stuff
+    public GameObject model;
+    public bool lookRotation = true;
+    private Transform modelTransform;
+    private Animator modelAnimator;
 
-    // Initialize character model animator
     void Start()
     {
-        GameObject character = GameObject.FindGameObjectsWithTag("IK_Character")[0];
-        animator = character.GetComponent<Animator>();
+        modelTransform = model.transform;
+        modelAnimator = model.GetComponent<Animator>();
     }
 
     //*issue* - want to grab players prefab
@@ -57,17 +59,19 @@ public class BotAI : MonoBehaviour
         if (walkPointSet)
         {
             agent.SetDestination(walkPoint);
-            animator.SetBool("Move", true);
+            modelAnimator.SetBool("Move", true);
         }
 
         //Calculate distance to walkpoint
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walkpoint reached
-        if(distanceToWalkPoint.magnitude < 1f)
+        if(distanceToWalkPoint.magnitude < 0.1f)
         {
             walkPointSet = false;
-            animator.SetBool("Move", false);
+            modelAnimator.SetBool("Move", false);
+            Vector3 walkPointNoY = new Vector3(transform.position.x, modelTransform.position.y, transform.position.z);
+            modelTransform.position = walkPointNoY;
         }  
     }
 
@@ -81,7 +85,12 @@ public class BotAI : MonoBehaviour
 
         //Search for random point on map within bounds
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        {
             walkPointSet = true;
+
+            if(lookRotation)
+                transform.LookAt(new Vector3(walkPoint.x, transform.position.y, walkPoint.z));
+        }
     }
 
     //visualize bot sight range
