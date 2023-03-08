@@ -2319,8 +2319,8 @@ MonoBehaviour:
   body: {fileID: 4481225473091488}
   otherFoot: {fileID: 2363900473455544169}
   speed: 3
-  stepDistance: 0.8
-  stepLength: 0.8
+  stepDistance: 0.6
+  stepLength: 0.6
   stepHeight: 0.6
   footPosOffset: {x: 0, y: 0, z: 0}
   footRotOffset: {x: 0, y: 0, z: 0}
@@ -2374,8 +2374,8 @@ MonoBehaviour:
   body: {fileID: 4481225473091488}
   otherFoot: {fileID: 7047737680752964372}
   speed: 3
-  stepDistance: 0.8
-  stepLength: 0.8
+  stepDistance: 0.6
+  stepLength: 0.6
   stepHeight: 0.6
   footPosOffset: {x: 0, y: 0, z: 0}
   footRotOffset: {x: 0, y: 0, z: 0}

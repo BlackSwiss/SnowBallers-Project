@@ -19,10 +19,19 @@ public class BotAI : MonoBehaviour
     bool walkPointSet;
     public float walkPointRange;
 
-
     //States
     public float sightRange;
     public bool playerInSightRange;
+
+    //IK_Character Model Animator
+    private Animator animator;
+
+    // Initialize character model animator
+    void Start()
+    {
+        GameObject character = GameObject.FindGameObjectsWithTag("IK_Character")[0];
+        animator = character.GetComponent<Animator>();
+    }
 
     //*issue* - want to grab players prefab
     private void Awake()
@@ -44,16 +53,22 @@ public class BotAI : MonoBehaviour
     {
         if (!walkPointSet)
             SearchWalkPoint(); 
-        
+
         if (walkPointSet)
+        {
             agent.SetDestination(walkPoint);
+            animator.SetBool("Move", true);
+        }
 
         //Calculate distance to walkpoint
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walkpoint reached
         if(distanceToWalkPoint.magnitude < 1f)
+        {
             walkPointSet = false;
+            animator.SetBool("Move", false);
+        }  
     }
 
     private void SearchWalkPoint()
