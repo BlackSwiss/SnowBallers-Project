@@ -10,6 +10,7 @@ public class PS4Controller : MonoBehaviour
     public GameObject player;
     public GameObject leftController;
     public GameObject rightController;
+    public GameObject model;
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +89,25 @@ public class PS4Controller : MonoBehaviour
                 //InputDevice right = rightController.GetComponent<XRController>();
                 //left.TryGetFeatureValue(CommonUsages.grip, out float gripValue);
             }
+
+            //Dpad IK
+            else if(gamepad.dpad.left.IsPressed())
+            {
+                model.transform.Translate(Vector3.left * Time.deltaTime * 5f);
+            }
+            else if(gamepad.dpad.right.IsPressed())
+            {
+                model.transform.Translate(Vector3.right * Time.deltaTime * 5f);
+            }
+            else if(gamepad.dpad.up.IsPressed())
+            {
+                model.transform.Translate(Vector3.forward * Time.deltaTime * 5f);
+            }
+            else if(gamepad.dpad.down.IsPressed())
+            {
+                model.transform.Translate(Vector3.back * Time.deltaTime * 5f);
+            }
+
             else
             {
                 return;
