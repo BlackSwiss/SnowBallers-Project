@@ -21,6 +21,7 @@ public class NetworkPlayer : MonoBehaviour
 
     public int playerID;
 
+
     // Start is called before the first frame update
     void Start()
     {

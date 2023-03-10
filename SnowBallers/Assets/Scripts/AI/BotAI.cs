@@ -22,7 +22,7 @@ public class BotAI : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-    public Snowball snowball;
+    public GameObject snowball;
 
     //States
     public float sightRange;
@@ -50,6 +50,7 @@ public class BotAI : MonoBehaviour
     // Check if player is in Sight
     void Update()
     {
+        //was having issues with this in awake
         if (GameObject.Find("NetworkPlayer"))
         {
             player = GameObject.Find("NetworkPlayer").transform;
@@ -122,10 +123,10 @@ public class BotAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            //Attack code
-            Rigidbody rb = Instantiate(snowball, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 32f, ForceMode.Impulse);
+            //Attack code ***need to write AIs own snowball code
+            //Rigidbody rb = Instantiate(snowball, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            //rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            //rb.AddForce(transform.up * 32f, ForceMode.Impulse);
 
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
