@@ -39,7 +39,10 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         Debug.Log("Added score to scoreboard");
 
         //Set players layer
-        spawnedPlayerPrefab.layer = LayerMask.NameToLayer("whatIsPlayer");
+        //int LayerPlayer = LayerMask.NameToLayer("whatIsPlayer");
+        //spawnedPlayerPrefab.layer = 1 << 7;
+        //Debug.Log("Current layer: " + spawnedPlayerPrefab.layer);
+
     }
 
     public override void OnDisconnected(DisconnectCause cause) 
