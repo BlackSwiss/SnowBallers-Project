@@ -611,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5237043060393139021, guid: cdf23d3f49770a14bb4af5ee123bc826, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5237043060508660433, guid: cdf23d3f49770a14bb4af5ee123bc826, type: 3}
       propertyPath: m_IsActive
@@ -631,7 +631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5237043060578553085, guid: cdf23d3f49770a14bb4af5ee123bc826, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5237043060827991031, guid: cdf23d3f49770a14bb4af5ee123bc826, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -775,7 +775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5237043061486189819, guid: cdf23d3f49770a14bb4af5ee123bc826, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdf23d3f49770a14bb4af5ee123bc826, type: 3}
@@ -2771,10 +2771,10 @@ MonoBehaviour:
     sceneIndex: 1
     maxPlayer: 2
   - Name: Fun Room
-    sceneIndex: 2
+    sceneIndex: 5
     maxPlayer: 10
   - Name: Third Room
-    sceneIndex: 1
+    sceneIndex: 5
     maxPlayer: 4
 --- !u!4 &1497082559
 Transform:
