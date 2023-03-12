@@ -39,8 +39,9 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         Debug.Log("Added score to scoreboard");
 
         //Set players layer
-        spawnedPlayerPrefab.layer = 7;
-        Debug.Log("Current layer: " + spawnedPlayerPrefab.layer);
+        //int LayerPlayer = LayerMask.NameToLayer("whatIsPlayer");
+        //spawnedPlayerPrefab.layer = 1 << 7;
+        //Debug.Log("Current layer: " + spawnedPlayerPrefab.layer);
 
     }
 
