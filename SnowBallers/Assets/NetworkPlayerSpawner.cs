@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using Unity.XR.CoreUtils;
+
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -13,10 +15,16 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public GameObject scoreManager;
     public List<GameObject> players = new List<GameObject>();
 
+    // Vars for spawn point index and managing XR camera position for spawned players 
+    public int spawnPointIndex;
+    private Transform headRig;
+    private Transform leftHandRig;
+    private Transform rightHandRig;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -27,9 +35,20 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        //Set index for spawn point array
+        spawnPointIndex = PhotonNetwork.CurrentRoom.PlayerCount - 1;
         base.OnJoinedRoom();
+
         //Spawn player model and controls
-        spawnedPlayerPrefab = PhotonNetwork.Instantiate("Network Player", transform.position, transform.rotation);
+        spawnedPlayerPrefab = PhotonNetwork.Instantiate("Network Player", SpawnManager.instance.spawnPoints[spawnPointIndex].position, SpawnManager.instance.spawnPoints[spawnPointIndex].rotation);
+        
+        //Set XR origin Transform position to spawn point's position so that spawned player's camera is matching spawn point direction .
+        XROrigin rig = FindObjectOfType<XROrigin>();
+        rig.transform.position = SpawnManager.instance.spawnPoints[spawnPointIndex].position;
+        rig.transform.rotation = SpawnManager.instance.spawnPoints[spawnPointIndex].rotation;
+        headRig = rig.transform.Find("Camera Offset/Main Camera");
+        leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
+        rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
 
         //Give them an id so we can keep track of score
         spawnedPlayerPrefab.GetComponent<NetworkPlayer>().playerID = PhotonNetwork.LocalPlayer.ActorNumber;
