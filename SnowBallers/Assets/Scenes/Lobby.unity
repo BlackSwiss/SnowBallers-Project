@@ -2771,7 +2771,7 @@ MonoBehaviour:
     sceneIndex: 1
     maxPlayer: 2
   - Name: Fun Room
-    sceneIndex: 5
+    sceneIndex: 4
     maxPlayer: 10
   - Name: Third Room
     sceneIndex: 5
