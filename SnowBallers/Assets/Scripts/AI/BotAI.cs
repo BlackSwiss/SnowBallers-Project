@@ -10,6 +10,7 @@ public class BotAI : MonoBehaviour
 {
     public NavMeshAgent agent;
 
+    [SerializeField]
     private Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
