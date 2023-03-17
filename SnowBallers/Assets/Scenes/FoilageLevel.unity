@@ -390,17 +390,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2628924408708436150, guid: 445506bfe97f74618aa3dac2a010ced3, type: 3}
   m_PrefabInstance: {fileID: 141336093}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &193721784 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1573434516138435007, guid: a0e2df5afa3728c40bd3c355efc4c57e, type: 3}
-  m_PrefabInstance: {fileID: 1573434516214567943}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfbeafdfb97eea048a22e6ec42ebe55b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &207117940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1796,7 +1785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4696782827700138822, guid: 1b40fa0051c1389429ac2a16db4dd498, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4701239026875769551, guid: 1b40fa0051c1389429ac2a16db4dd498, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1905,7 +1894,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672020230}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85a77f3aabf0c3b47a2839b4e55c144f, type: 3}
   m_Name: 
@@ -4268,6 +4257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 996118409}
+  players: []
+  spawnPointIndex: 0
 --- !u!1001 &1434312120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5268,10 +5259,12 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
+  networkPlayerSpawner: {fileID: 0}
+  players: []
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 6
   timeBetweenAttacks: 5
-  snowball: {fileID: 193721784}
+  snowball: {fileID: 0}
   sightRange: 6
   attackRange: 3
   playerInSightRange: 0
@@ -5350,7 +5343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123089442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.35, y: 0.505, z: 2.59}
+  m_LocalPosition: {x: 3.35, y: 0.84, z: 2.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
