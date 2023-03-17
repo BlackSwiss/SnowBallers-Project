@@ -11,6 +11,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     private GameObject spawnedPlayerPrefab;
     public GameObject scoreManager;
+    public List<GameObject> players = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -38,10 +39,13 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
         Debug.Log("Added score to scoreboard");
 
-        //Set players layer
-        //int LayerPlayer = LayerMask.NameToLayer("whatIsPlayer");
-        //spawnedPlayerPrefab.layer = 1 << 7;
-        //Debug.Log("Current layer: " + spawnedPlayerPrefab.layer);
+        //Set players to player layer
+        spawnedPlayerPrefab.layer = 7;
+
+        //Add players to List of players
+        players.Add(spawnedPlayerPrefab);
+        Debug.Log("Player added to list");
+
 
     }
 
@@ -62,5 +66,10 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public void LeaveRoom() 
     {
         PhotonNetwork.LeaveRoom();
+    }
+
+    public List<GameObject> getPlayers()
+    {
+        return players;
     }
 }

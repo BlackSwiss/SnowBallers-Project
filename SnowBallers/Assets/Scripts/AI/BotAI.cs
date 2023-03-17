@@ -10,9 +10,12 @@ public class BotAI : MonoBehaviour
 {
     public NavMeshAgent agent;
 
-    public Transform player;
+    private Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
+
+    public NetworkPlayerSpawner networkPlayerSpawner;
+    public List<GameObject> players;
 
     //Dodging
     public Vector3 walkPoint;
@@ -22,7 +25,7 @@ public class BotAI : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-    public Snowball snowball;
+    public GameObject snowball;
 
     //States
     public float sightRange;
@@ -40,6 +43,8 @@ public class BotAI : MonoBehaviour
     {
         modelTransform = model.transform;
         modelAnimator = model.GetComponent<Animator>();
+        players = networkPlayerSpawner.getPlayers();
+        
     }
 
     private void Awake()
@@ -48,22 +53,33 @@ public class BotAI : MonoBehaviour
     }
 
     // Check if player is in Sight
-    void Update()
+    private void Update()
     {
-        if (GameObject.Find("NetworkPlayer"))
+        if (players.Count > 0)
         {
-            player = GameObject.Find("NetworkPlayer").transform;
+            player = players[0].transform;
+            Debug.Log("Player found" + player.transform.position.x + player.transform.position.z);
         }
+        
 
         playerInSightRange  = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange)
+        {
+            Debug.Log("Bot Dodging");
             Dodging();
+        }
         if (playerInSightRange && !playerInAttackRange)
+        {
+            Debug.Log("Bot Chasing");
             ChasePlayer();
+        }
         if (playerInAttackRange && playerInSightRange)
+        {
+            Debug.Log("Bot Attacking");
             AttackPlayer();
+        }
     }
 
     private void Dodging()
@@ -81,7 +97,7 @@ public class BotAI : MonoBehaviour
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walkpoint reached
-        if(distanceToWalkPoint.magnitude < 0.1f)
+        if(distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
             modelAnimator.SetBool("Move", false);
@@ -122,10 +138,12 @@ public class BotAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            //Attack code
+            alreadyAttacked = true;
+
+            //Attack code ***need to write AIs own snowball code
             Rigidbody rb = Instantiate(snowball, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 32f, ForceMode.Impulse);
+            rb.AddForce(transform.forward * 16f, ForceMode.Impulse);
+            rb.AddForce(transform.up * 16f, ForceMode.Impulse);
 
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }

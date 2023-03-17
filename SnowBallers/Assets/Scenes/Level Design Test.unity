@@ -333,17 +333,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2628924408708436150, guid: 445506bfe97f74618aa3dac2a010ced3, type: 3}
   m_PrefabInstance: {fileID: 141336093}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &193721784 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1573434516138435007, guid: a0e2df5afa3728c40bd3c355efc4c57e, type: 3}
-  m_PrefabInstance: {fileID: 1573434516214567943}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfbeafdfb97eea048a22e6ec42ebe55b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &207117940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3852,6 +3841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 996118409}
+  players: []
 --- !u!1001 &1434312120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4822,9 +4812,9 @@ GameObject:
   - component: {fileID: 2123089448}
   - component: {fileID: 2123089446}
   - component: {fileID: 2123089444}
-  - component: {fileID: 2123089443}
   - component: {fileID: 2123089450}
   - component: {fileID: 2123089449}
+  - component: {fileID: 2123089451}
   m_Layer: 0
   m_Name: BotAI
   m_TagString: Untagged
@@ -4832,36 +4822,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
   m_IsActive: 1
---- !u!114 &2123089443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2123089442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55b610823c174da4691a191001a12485, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 2123089444}
-  player: {fileID: 6454747620015955238, guid: 44751a73233dc204aa2e6f345c695260, type: 3}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 6
-  timeBetweenAttacks: 5
-  snowball: {fileID: 193721784}
-  sightRange: 6
-  attackRange: 3
-  playerInSightRange: 0
-  playerInAttackRange: 0
-  model: {fileID: 1442222467}
-  lookRotation: 1
 --- !u!195 &2123089444
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4973,6 +4933,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2123089451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123089442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b610823c174da4691a191001a12485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 2123089444}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  networkPlayerSpawner: {fileID: 1420735363}
+  players: []
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 5
+  timeBetweenAttacks: 5
+  snowball: {fileID: 1573434516138434985, guid: a0e2df5afa3728c40bd3c355efc4c57e, type: 3}
+  sightRange: 4
+  attackRange: 2
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  model: {fileID: 1442222467}
+  lookRotation: 1
 --- !u!1001 &2128031843
 PrefabInstance:
   m_ObjectHideFlags: 0
