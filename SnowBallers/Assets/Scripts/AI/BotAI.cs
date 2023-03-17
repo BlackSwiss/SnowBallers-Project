@@ -36,9 +36,9 @@ public class BotAI : MonoBehaviour
 
     //IK_Character Model Stuff
     public GameObject model;
-    public bool lookRotation = true;
     private Transform modelTransform;
     private Animator modelAnimator;
+    public float AttackAnimationDelay = 2;
 
     void Start()
     {
@@ -61,25 +61,37 @@ public class BotAI : MonoBehaviour
             player = players[0].transform;
             Debug.Log("Player found" + player.transform.position.x + player.transform.position.z);
         }
-        
 
         playerInSightRange  = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange)
+        if(alreadyAttacked)
         {
             Debug.Log("Bot Dodging");
+            modelAnimator.SetBool("Throw", false);
+            modelAnimator.SetBool("Move", false);
             Dodging();
         }
-        if (playerInSightRange && !playerInAttackRange)
+        else
         {
-            Debug.Log("Bot Chasing");
-            ChasePlayer();
-        }
-        if (playerInAttackRange && playerInSightRange)
-        {
-            Debug.Log("Bot Attacking");
-            AttackPlayer();
+            if(playerInAttackRange)
+            {
+                Debug.Log("Bot Attacking");
+                modelAnimator.SetBool("Throw", true);
+                Invoke(nameof(AttackPlayer), AttackAnimationDelay);
+            }
+            else if(playerInSightRange)
+            {
+                Debug.Log("Bot Chasing");
+                modelAnimator.SetBool("Move", true);
+                ChasePlayer();
+            }
+            else
+            {
+                Debug.Log("Bot Dodging");
+                modelAnimator.SetBool("Move", false);
+                Dodging();
+            }
         }
     }
 
@@ -89,19 +101,15 @@ public class BotAI : MonoBehaviour
             SearchWalkPoint(); 
 
         if (walkPointSet)
-        {
             agent.SetDestination(walkPoint);
-            modelAnimator.SetBool("Move", true);
-        }
 
         //Calculate distance to walkpoint
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walkpoint reached
-        if(distanceToWalkPoint.magnitude < 1f)
+        if(distanceToWalkPoint.magnitude < 0.1f)
         {
             walkPointSet = false;
-            modelAnimator.SetBool("Move", false);
             Vector3 walkPointNoY = new Vector3(transform.position.x, modelTransform.position.y, transform.position.z);
             modelTransform.position = walkPointNoY;
         }  
@@ -120,34 +128,45 @@ public class BotAI : MonoBehaviour
         {
             walkPointSet = true;
 
-            if(lookRotation)
-                transform.LookAt(new Vector3(walkPoint.x, transform.position.y, walkPoint.z));
+            //Make bot look at player
+            transform.LookAt(new Vector3(walkPoint.x, transform.position.y, walkPoint.z));
         }
     }
 
     private void ChasePlayer()
     {
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
         agent.SetDestination(player.position);
     }
 
     private void AttackPlayer()
     {
-        //Make sure bot doesn't move
-        agent.SetDestination(transform.position);
+        //Store old position and rotation to reset after attack
+        Vector3 oldPosition = transform.position;
+        Quaternion oldRotation = transform.rotation;
 
-        transform.LookAt(player);
+        //Make sure bot doesn't move
+        //agent.SetDestination(transform.position);
+
+        //Make bot look at player
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
 
             //Attack code ***need to write AIs own snowball code
-            Rigidbody rb = Instantiate(snowball, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            GameObject newSnowball = Instantiate(snowball, transform.position, Quaternion.identity);
+            Rigidbody rb = newSnowball.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 16f, ForceMode.Impulse);
             rb.AddForce(transform.up * 16f, ForceMode.Impulse);
-
+            Destroy(newSnowball, 5);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+
+        //Resets position and rotation once attack is complete
+        transform.position =  oldPosition;
+        transform.rotation = oldRotation;
     }
 
     private void ResetAttack()

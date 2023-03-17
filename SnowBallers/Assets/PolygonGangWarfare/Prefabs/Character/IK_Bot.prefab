@@ -81,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1988909366079622990, guid: fa8de4bb0df5dad4eac4829270d06056, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2363900473455544169, guid: fa8de4bb0df5dad4eac4829270d06056, type: 3}
       propertyPath: footRotOffset.y
@@ -90,6 +90,14 @@ PrefabInstance:
     - target: {fileID: 2363900473455544169, guid: fa8de4bb0df5dad4eac4829270d06056, type: 3}
       propertyPath: footRotOffset.z
       value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862407049441066501, guid: fa8de4bb0df5dad4eac4829270d06056, type: 3}
+      propertyPath: m_TagString
+      value: IK_Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922524153447591413, guid: fa8de4bb0df5dad4eac4829270d06056, type: 3}
+      propertyPath: m_TagString
+      value: IK_Target
       objectReference: {fileID: 0}
     - target: {fileID: 6125016971289997542, guid: fa8de4bb0df5dad4eac4829270d06056, type: 3}
       propertyPath: m_RigLayers.Array.data[1].m_Active
