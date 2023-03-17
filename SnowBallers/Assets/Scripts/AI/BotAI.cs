@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 //Tutorial used: https://www.youtube.com/watch?v=UjkSFoLxesw&ab_channel=Dave%2FGameDevelopment
 //
@@ -27,6 +28,10 @@ public class BotAI : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject snowball;
+    public float attackHorizontalVelocity = 10;
+    public float attackVerticalVelocity = 5;
+    public float attackAnimationDelay = 1.85f;
+    public float enableIKDelay = 1;
 
     //States
     public float sightRange;
@@ -38,14 +43,14 @@ public class BotAI : MonoBehaviour
     public GameObject model;
     private Transform modelTransform;
     private Animator modelAnimator;
-    public float AttackAnimationDelay = 2;
+    private RigBuilder modelRigBuilder;
 
     void Start()
     {
         modelTransform = model.transform;
         modelAnimator = model.GetComponent<Animator>();
         players = networkPlayerSpawner.getPlayers();
-        
+        modelRigBuilder = GetComponentInChildren<RigBuilder>();
     }
 
     private void Awake()
@@ -77,8 +82,10 @@ public class BotAI : MonoBehaviour
             if(playerInAttackRange)
             {
                 Debug.Log("Bot Attacking");
+                modelRigBuilder.enabled = false;
                 modelAnimator.SetBool("Throw", true);
-                Invoke(nameof(AttackPlayer), AttackAnimationDelay);
+                Invoke(nameof(AttackPlayer), attackAnimationDelay);
+                Invoke(nameof(ResetIKTracking), enableIKDelay);
             }
             else if(playerInSightRange)
             {
@@ -129,7 +136,8 @@ public class BotAI : MonoBehaviour
             walkPointSet = true;
 
             //Make bot look at player
-            transform.LookAt(new Vector3(walkPoint.x, transform.position.y, walkPoint.z));
+            //transform.LookAt(new Vector3(walkPoint.x, transform.position.y, walkPoint.z));
+            transform.LookAt(walkPoint);
         }
     }
 
@@ -146,10 +154,11 @@ public class BotAI : MonoBehaviour
         Quaternion oldRotation = transform.rotation;
 
         //Make sure bot doesn't move
-        //agent.SetDestination(transform.position);
+        agent.SetDestination(transform.position);
 
         //Make bot look at player
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+        //transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+        transform.LookAt(player);
 
         if (!alreadyAttacked)
         {
@@ -158,8 +167,8 @@ public class BotAI : MonoBehaviour
             //Attack code ***need to write AIs own snowball code
             GameObject newSnowball = Instantiate(snowball, transform.position, Quaternion.identity);
             Rigidbody rb = newSnowball.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 16f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 16f, ForceMode.Impulse);
+            rb.AddForce(modelTransform.forward * attackHorizontalVelocity, ForceMode.Impulse);
+            rb.AddForce(modelTransform.up * attackVerticalVelocity, ForceMode.Impulse);
             Destroy(newSnowball, 5);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
@@ -172,6 +181,11 @@ public class BotAI : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    private void ResetIKTracking()
+    {
+        modelRigBuilder.enabled = true;
     }
 
     //visualize bot sight range

@@ -3798,6 +3798,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2123089448}
     m_Modifications:
+    - target: {fileID: 2218717303455628653, guid: 313f785ef661a8b47a4aee726abbb738, type: 3}
+      propertyPath: m_RigLayers.Array.data[0].m_Active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138244826989822889, guid: 313f785ef661a8b47a4aee726abbb738, type: 3}
+      propertyPath: m_TagString
+      value: IK_Target
+      objectReference: {fileID: 0}
     - target: {fileID: 5460036740162906667, guid: 313f785ef661a8b47a4aee726abbb738, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4813,12 +4821,14 @@ MonoBehaviour:
   walkPointRange: 5
   timeBetweenAttacks: 5
   snowball: {fileID: 1573434516138434985, guid: a0e2df5afa3728c40bd3c355efc4c57e, type: 3}
+  attackHorizontalVelocity: 10
+  attackVerticalVelocity: 5
+  attackAnimationDelay: 2
   sightRange: 4
   attackRange: 2
   playerInSightRange: 0
   playerInAttackRange: 0
   model: {fileID: 1442222467}
-  AttackAnimationDelay: 1.85
 --- !u!1001 &2128031843
 PrefabInstance:
   m_ObjectHideFlags: 0
