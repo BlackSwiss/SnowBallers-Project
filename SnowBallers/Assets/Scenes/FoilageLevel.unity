@@ -5461,8 +5461,8 @@ MonoBehaviour:
   attackVerticalVelocity: 5
   attackAnimationDelay: 1.85
   enableIKDelay: 1
-  sightRange: 6
-  attackRange: 3
+  sightRange: 8
+  attackRange: 6
   playerInSightRange: 0
   playerInAttackRange: 0
   model: {fileID: 1442222467}
@@ -5595,7 +5595,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1442222469}
+  - {fileID: 1442222470}
+  - {fileID: 1604213503}
+  - {fileID: 1604213502}
   sceneViewId: 6
   InstantiationId: 0
   isRuntimeInstantiated: 0
