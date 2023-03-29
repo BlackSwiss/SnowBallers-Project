@@ -10,14 +10,17 @@ public class NetworkPlayer : MonoBehaviour
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
+    public Transform bag;
     private PhotonView photonView;
 
     public Animator leftHandAnimator;
     public Animator rightHandAnimator;
+    public GameObject[] hideRenderers;
 
     private Transform headRig;
     private Transform leftHandRig;
     private Transform rightHandRig;
+    private Transform bagRig;
 
     public int playerID;
 
@@ -29,12 +32,15 @@ public class NetworkPlayer : MonoBehaviour
         headRig = rig.transform.Find("Camera Offset/Main Camera");
         leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
         rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
+        bagRig = rig.transform.Find("Camera Offset/BagLoc");
+        bagRig.transform.localPosition = new Vector3(0.275999993f, 0.287f, 0.104999997f);
 
         if (photonView.IsMine)
         {
-            foreach (var item in GetComponentsInChildren<Renderer>())
+            foreach (var item in hideRenderers)
             {
-                item.enabled = false;
+                Renderer itemSelected = item.GetComponent<Renderer>();
+                itemSelected.enabled = false;
             }
         }
     }
@@ -51,6 +57,7 @@ public class NetworkPlayer : MonoBehaviour
             MapPosition(head, headRig);
             MapPosition(leftHand, leftHandRig);
             MapPosition(rightHand, rightHandRig);
+            MapPosition(bag, bagRig);
 
             UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.LeftHand), leftHandAnimator);
             UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.RightHand), rightHandAnimator);
