@@ -18,6 +18,7 @@ public class ScoreManager : MonoBehaviourPun
     void Start()
     {
         ScoreEvents.current.onPlayerHit += incrementScore;
+        ScoreEvents.current.onHeadshot += incrementScoreHeadshot;
         scoreLimit = 1;
         timeBeforeKicked = 15;
         //Invoke(nameof(endGame), 5);
@@ -59,6 +60,31 @@ public class ScoreManager : MonoBehaviourPun
             {
                 Debug.Log("Someone hit, incrementing score to " + ownerID);
                 //Use the increment score script on object itself
+                scoreScript.incrementScore();
+            }
+
+            //Check if player score has reached score limit
+            if(scoreScript.score >= scoreLimit)
+            {
+                gameOver.Play();
+                Invoke(nameof(endGame), 5);
+            }
+        }
+    }
+
+    //Find and increment correct score for headshot
+    public void incrementScoreHeadshot(int ownerID)
+    {
+
+        foreach (GameObject playerScore in playerScores)
+        {
+            PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
+            //If this player was the owner of the hit
+            if (scoreScript.playerID == ownerID)
+            {
+                Debug.Log("Someone hit, incrementing score to " + ownerID);
+                //Use the increment score script on object itself
+                scoreScript.incrementScore();
                 scoreScript.incrementScore();
             }
 

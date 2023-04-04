@@ -8,6 +8,8 @@ TagManager:
   - RightController
   - IK_Character
   - IK_Target
+  - Spawn
+  - Headshot
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using Photon;
 
 public class Snowball : MonoBehaviour
 {
+    public AudioSource snowballHit;
     public AudioSource bonk;
     public AudioSource dizzy;
 
@@ -18,7 +19,35 @@ public class Snowball : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Headshot")
+        {
+            Debug.Log("Player headshot!");
+            //This will prevent a snowball that no one threw to do damage
+            if (ownersID != 0)
+            {
+                ScoreEvents.current.headshot(ownersID);
+                Debug.Log("Headshot");
+            }
+
+            if (collision.gameObject.GetComponent<Health>())
+            {
+                //collision.gameObject.GetComponent<Health>().decreaseHealth(1);
+                collision.gameObject.GetComponent<Health>().hitAnimation();
+            }
+            //if(collision.gameObject.GetComponent<ChangeColor>())
+            if (collision.gameObject.GetComponent<ChangeColor>())
+                collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
+                
+
+            foreach (Transform c in transform)
+            {
+                c.gameObject.GetComponent<ParticleSystem>().Play();
+            }
+
+            bonk.Play();
+            dizzy.Play();
+        }
+        else if(collision.gameObject.tag == "Player")
         {
             Debug.Log("Player hit!");
             //This will prevent a snowball that no one threw to do damage
@@ -43,9 +72,7 @@ public class Snowball : MonoBehaviour
                 c.gameObject.GetComponent<ParticleSystem>().Play();
             }
 
-            bonk.Play();
-            dizzy.Play();
-
+            snowballHit.Play();
         }
     }
 

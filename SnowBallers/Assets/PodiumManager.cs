@@ -14,7 +14,7 @@ public class PodiumManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(spawnPointsToAdd.Length);
+        
     }
 
     // Update is called once per frame

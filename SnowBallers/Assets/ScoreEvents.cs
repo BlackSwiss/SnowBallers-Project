@@ -21,4 +21,14 @@ public class ScoreEvents : MonoBehaviour
             onPlayerHit(ownerID);
         }
     }
+
+    public event Action<int> onHeadshot;
+
+    public void headshot(int ownerID)
+    {
+        if(onHeadshot != null)
+        {
+            onHeadshot(ownerID);
+        }
+    }
 }
