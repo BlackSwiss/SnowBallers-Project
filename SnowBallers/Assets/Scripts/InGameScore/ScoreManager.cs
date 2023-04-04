@@ -10,12 +10,17 @@ public class ScoreManager : MonoBehaviourPun
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> playerScores = new List<GameObject>();
     public GameObject ScoreHolder;
-
+    public int scoreLimit;
+    public int timeBeforeKicked;
+    public AudioSource gameOver;
 
     // Start is called before the first frame update
     void Start()
     {
         ScoreEvents.current.onPlayerHit += incrementScore;
+        scoreLimit = 1;
+        timeBeforeKicked = 15;
+        //Invoke(nameof(endGame), 5);
     }
 
     [PunRPC]
@@ -39,9 +44,6 @@ public class ScoreManager : MonoBehaviourPun
         //Add the player id to this specific score listing 
         //playerScore.GetComponent<PlayerScore>().syncPlayerID(player.GetComponent<NetworkPlayer>().playerID);
         playerScore.GetPhotonView().RPC("syncPlayerID",RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.ActorNumber);
-
-
-
     }
 
 
@@ -59,8 +61,26 @@ public class ScoreManager : MonoBehaviourPun
                 //Use the increment score script on object itself
                 scoreScript.incrementScore();
             }
+
+            //Check if player score has reached score limit
+            if(scoreScript.score >= scoreLimit)
+            {
+                gameOver.Play();
+                Invoke(nameof(endGame), 5);
+            }
         }
     }
 
+    private void endGame()
+    {
+        PodiumManager podiumManager = FindObjectOfType<PodiumManager>();
+        podiumManager.swapToPodium();
+        Invoke(nameof(kickPlayer), timeBeforeKicked);
+    }
 
+    private void kickPlayer()
+    {
+        NetworkPlayerSpawner networkPlayerSpawner = FindObjectOfType<NetworkPlayerSpawner>();
+        networkPlayerSpawner.LeaveRoom();
+    }
 }
