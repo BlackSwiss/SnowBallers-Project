@@ -21,16 +21,37 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     private Transform leftHandRig;
     private Transform rightHandRig;
 
+    // Vars for timer
+    ExitGames.Client.Photon.Hashtable customValue;
+    double startTime;
+    double timerIncrement;
+    double roundTime = 10;
+    double timerDecrement;
+    bool isTimerSet = false;
+    //public  PhotonView photonView;
+
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(isTimerSet)
+        {
+            //Set increment as difference from current time and start time
+            timerIncrement = PhotonNetwork.Time - startTime; 
+            timerDecrement = roundTime - timerIncrement;
+            Debug.Log("timerDecrement" + timerDecrement);
+            if(timerDecrement <= 0) 
+            {
+                // Call function for when time is up
+                OnTimeIsUp();
+                Debug.Log("Time is up!");
+            }
+        }
     }
 
     public override void OnJoinedRoom()
@@ -65,7 +86,15 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         players.Add(spawnedPlayerPrefab);
         Debug.Log("Player added to list");
 
-
+        // Have second player start timer setting
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+        customValue = new ExitGames.Client.Photon.Hashtable();
+        startTime = PhotonNetwork.Time;
+        customValue.Add("StartTime", startTime);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(customValue);
+        isTimerSet = true;
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause) 
@@ -91,4 +120,19 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         return players;
     }
+
+    // Called when round timer reaches 0
+    public void OnTimeIsUp()
+    {
+        //Add logic to call on rpc
+        //photonView.RPC("KickPlayersFromRoom", RpcTarget.AllBuffered);
+    }
+
+    /*
+    [PunRPC]
+    public void KickPlayersFromRoom()
+    {
+        LeaveRoom();
+    }
+    */
 }
