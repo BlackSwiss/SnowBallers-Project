@@ -149,10 +149,14 @@ public class BotAI : MonoBehaviour
 
     private void AttackPlayer()
     {
+        //Checks if agent is on nav mesh
+        if(!agent.isOnNavMesh)
+            return;
+
         //Store old position and rotation to reset after attack
         Vector3 oldPosition = transform.position;
         Quaternion oldRotation = transform.rotation;
-
+        
         //Make sure bot doesn't move
         agent.SetDestination(transform.position);
 

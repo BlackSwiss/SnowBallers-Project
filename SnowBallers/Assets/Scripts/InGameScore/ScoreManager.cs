@@ -10,18 +10,61 @@ public class ScoreManager : MonoBehaviourPun
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> playerScores = new List<GameObject>();
     public GameObject ScoreHolder;
-    public int scoreLimit;
-    public int timeBeforeKicked;
-    public AudioSource gameOver;
+    public AudioSource gameOverSound;
+
+    //Variables for end game podium
+    public int[] topScores = {-1,-1,-1};
+    public int[] topScoresID = {-1,-1,-1};
+    public bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
     {
         ScoreEvents.current.onPlayerHit += incrementScore;
         ScoreEvents.current.onHeadshot += incrementScoreHeadshot;
-        scoreLimit = 1;
-        timeBeforeKicked = 15;
         //Invoke(nameof(endGame), 5);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Calculate top players for end game podium if there is at least one player
+        if(playerScores.Count > 0 && !gameOver)
+        {
+            calculateTopPlayers();
+        }
+    }
+
+    //Keeps track of top 3 players for end game podium
+    private void calculateTopPlayers()
+    {
+        foreach (GameObject playerScore in playerScores)
+        {
+            //Get current player score
+            PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
+
+            //If current score is greater than 1st place score
+            if(scoreScript.score >= topScores[0])
+            {
+                //Replace 1st place from topScores
+                topScores[0] = scoreScript.score;
+                topScoresID[0] = scoreScript.playerID;
+            }
+            //If current score is greater than 2nd place score
+            else if(scoreScript.score >= topScores[1])
+            {
+                //Replace 2nd place from topScores
+                topScores[1] = scoreScript.score;
+                topScoresID[1] = scoreScript.playerID;
+            }
+            //If current score is greater than 3rd place score
+            else if(scoreScript.score >= topScores[2])
+            {
+                //Replace 3rd place from topScores
+                topScores[2] = scoreScript.score;
+                topScoresID[2] = scoreScript.playerID;
+            }
+        }
     }
 
     [PunRPC]
@@ -51,7 +94,6 @@ public class ScoreManager : MonoBehaviourPun
     //Find and increment correct score
     public void incrementScore(int ownerID)
     {
-
         foreach (GameObject playerScore in playerScores)
         {
             PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
@@ -61,13 +103,6 @@ public class ScoreManager : MonoBehaviourPun
                 Debug.Log("Someone hit, incrementing score to " + ownerID);
                 //Use the increment score script on object itself
                 scoreScript.incrementScore();
-            }
-
-            //Check if player score has reached score limit
-            if(scoreScript.score >= scoreLimit)
-            {
-                gameOver.Play();
-                Invoke(nameof(endGame), 5);
             }
         }
     }
@@ -75,7 +110,6 @@ public class ScoreManager : MonoBehaviourPun
     //Find and increment correct score for headshot
     public void incrementScoreHeadshot(int ownerID)
     {
-
         foreach (GameObject playerScore in playerScores)
         {
             PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
@@ -87,26 +121,23 @@ public class ScoreManager : MonoBehaviourPun
                 scoreScript.incrementScore();
                 scoreScript.incrementScore();
             }
-
-            //Check if player score has reached score limit
-            if(scoreScript.score >= scoreLimit)
-            {
-                gameOver.Play();
-                Invoke(nameof(endGame), 5);
-            }
         }
     }
 
-    private void endGame()
+    //Wrapper function used with invoke in endGame() to delay end game transition
+    private void endGameInvoke()
     {
         PodiumManager podiumManager = FindObjectOfType<PodiumManager>();
         podiumManager.swapToPodium();
-        Invoke(nameof(kickPlayer), timeBeforeKicked);
     }
 
-    private void kickPlayer()
+    //Transitions to end game state
+    public void endGame()
     {
-        NetworkPlayerSpawner networkPlayerSpawner = FindObjectOfType<NetworkPlayerSpawner>();
-        networkPlayerSpawner.LeaveRoom();
+        Debug.Log("Game over, transitioning to end game podium");
+        gameOver = true;
+        gameOverSound.Play();
+        //Delays transition by 5 seconds to allow gameOverSound to finish playing
+        Invoke(nameof(endGameInvoke), 5);
     }
 }

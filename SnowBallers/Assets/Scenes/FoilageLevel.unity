@@ -1464,6 +1464,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1846947782}
     - target: {fileID: 1448764393329168506, guid: 2a2af954647144d43888855e258c4bc8, type: 3}
+      propertyPath: podiumSound
+      value: 
+      objectReference: {fileID: 1846947782}
+    - target: {fileID: 1448764393329168506, guid: 2a2af954647144d43888855e258c4bc8, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 996118410}
@@ -1546,6 +1550,10 @@ PrefabInstance:
     - target: {fileID: 1448764393329168509, guid: 2a2af954647144d43888855e258c4bc8, type: 3}
       propertyPath: m_Name
       value: Podium Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6909012556611659307, guid: 2a2af954647144d43888855e258c4bc8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a2af954647144d43888855e258c4bc8, type: 3}
@@ -2378,9 +2386,10 @@ MonoBehaviour:
   players: []
   playerScores: []
   ScoreHolder: {fileID: 383559175}
-  scoreLimit: 0
-  timeBeforeKicked: 0
-  gameOver: {fileID: 1846947783}
+  gameOverSound: {fileID: 1846947783}
+  topScores: ffffffffffffffffffffffff
+  topScoresID: ffffffffffffffffffffffff
+  gameOver: 0
 --- !u!4 &996118411
 Transform:
   m_ObjectHideFlags: 0
@@ -3964,6 +3973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420735362}
   - component: {fileID: 1420735363}
+  - component: {fileID: 1420735364}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -4001,6 +4011,28 @@ MonoBehaviour:
   scoreManager: {fileID: 996118409}
   players: []
   spawnPointIndex: 0
+--- !u!114 &1420735364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420735360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 7
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1428773817
 GameObject:
   m_ObjectHideFlags: 0

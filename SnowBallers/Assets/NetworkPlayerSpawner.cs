@@ -28,6 +28,8 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     double roundTime = 10;
     double timerDecrement;
     bool isTimerSet = false;
+    bool isTimerOver = false;
+    int timeBeforeKicked = 15;
     //public  PhotonView photonView;
 
     // Start is called before the first frame update
@@ -39,17 +41,18 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if(isTimerSet)
+        if(isTimerSet && !isTimerOver)
         {
             //Set increment as difference from current time and start time
             timerIncrement = PhotonNetwork.Time - startTime; 
             timerDecrement = roundTime - timerIncrement;
-            Debug.Log("timerDecrement" + timerDecrement);
-            if(timerDecrement <= 0) 
+            Debug.Log("timerDecrement " + timerDecrement);
+            if(timerDecrement <= 0 && !isTimerOver)
             {
                 // Call function for when time is up
                 OnTimeIsUp();
                 Debug.Log("Time is up!");
+                isTimerOver = true;
             }
         }
     }
@@ -89,11 +92,11 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         // Have second player start timer setting
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
-        customValue = new ExitGames.Client.Photon.Hashtable();
-        startTime = PhotonNetwork.Time;
-        customValue.Add("StartTime", startTime);
-        PhotonNetwork.CurrentRoom.SetCustomProperties(customValue);
-        isTimerSet = true;
+            customValue = new ExitGames.Client.Photon.Hashtable();
+            startTime = PhotonNetwork.Time;
+            customValue.Add("StartTime", startTime);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(customValue);
+            isTimerSet = true;
         }
     }
 
@@ -106,7 +109,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         base.OnLeftRoom();
         PhotonNetwork.Destroy(spawnedPlayerPrefab);
-        PhotonNetwork.Disconnect();
+        //PhotonNetwork.Disconnect();
         PhotonNetwork.LoadLevel(0);
         Debug.Log("Left room.");
     }
@@ -124,15 +127,15 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     // Called when round timer reaches 0
     public void OnTimeIsUp()
     {
-        //Add logic to call on rpc
-        //photonView.RPC("KickPlayersFromRoom", RpcTarget.AllBuffered);
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        GameObject networkPlayer = GameObject.Find("Network Manager");
+        scoreManager.endGame();
+        networkPlayer.GetComponent<PhotonView>().RPC("KickPlayersFromRoom", RpcTarget.AllBuffered);
     }
 
-    /*
     [PunRPC]
     public void KickPlayersFromRoom()
     {
-        LeaveRoom();
+        Invoke(nameof(LeaveRoom), timeBeforeKicked);
     }
-    */
 }

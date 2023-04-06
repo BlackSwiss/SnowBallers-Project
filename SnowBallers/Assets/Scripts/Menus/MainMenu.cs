@@ -13,4 +13,12 @@ public class MainMenu : MonoBehaviour
     {
         UIManager.OpenMenu(Menu.OPTIONS_MENU, gameObject);
     }
+
+    public void OnClickExit()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
+    }
 }

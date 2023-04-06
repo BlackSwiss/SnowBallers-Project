@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfbeafdfb97eea048a22e6ec42ebe55b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snowballHit: {fileID: 0}
+  snowballHit: {fileID: 3950703654598258311, guid: 07cd06df2085cd744b63abe4d47ce353, type: 3}
   bonk: {fileID: 6798688068230551281, guid: d0fb6206a60e1c54d9c52a50b7a54f21, type: 3}
   dizzy: {fileID: 2535571729470389673, guid: 35c82bc09d039304a872fc568b0b3615, type: 3}
   initialPos: {x: 0, y: 0, z: 0}

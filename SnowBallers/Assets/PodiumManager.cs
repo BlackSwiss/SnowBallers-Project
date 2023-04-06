@@ -1,28 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.XR;
+using Unity.XR.CoreUtils;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PodiumManager : MonoBehaviour
 {
     public GameObject[] objectsToDisable;
     public GameObject[] objectsToEnable;
     public Transform[] spawnPointsToAdd;
-    public SpawnManager spawnManager;
-    public ScoreManager scoreManager;
-    public AudioSource drumRoll;
+    public AudioSource podiumSound;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //Disables unnecessary game objects for end game state
     private void disableObjects()
     {
         foreach(GameObject currentObject in objectsToDisable)
@@ -31,6 +21,7 @@ public class PodiumManager : MonoBehaviour
         }
     }
 
+    //Enables necessary game objects for end game state
     private void enableObjects()
     {
         foreach(GameObject currentObject in objectsToEnable)
@@ -39,16 +30,60 @@ public class PodiumManager : MonoBehaviour
         }
     }
 
+    //Replaces spawn points with podium spawn points
     private void addSpawnPointsToManager()
     {
-        spawnManager.spawnPoints = spawnPointsToAdd;
+        SpawnManager.instance.spawnPoints = spawnPointsToAdd;
     }
 
+    //Moves player to appropriate spawn point on podium
+    private void movePlayerToPodium()
+    {
+        XROrigin rig = FindObjectOfType<XROrigin>();
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        NetworkPlayer networkPlayer = FindObjectOfType<NetworkPlayer>();
+
+        //Stops function if no network player is found
+        if(networkPlayer == null)
+            return;
+
+        int playerID = networkPlayer.playerID;
+        //If current player is 1st place
+        if(playerID == scoreManager.topScoresID[0])
+        {
+            //Move current player to 1st place spawn point
+            rig.transform.position = SpawnManager.instance.spawnPoints[0].position;
+            rig.transform.rotation = SpawnManager.instance.spawnPoints[0].rotation;
+        }
+        //If current player is 2nd place
+        else if(playerID == scoreManager.topScoresID[1])
+        {
+            //Move current player to 2nd place spawn point
+            rig.transform.position = SpawnManager.instance.spawnPoints[1].position;
+            rig.transform.rotation = SpawnManager.instance.spawnPoints[1].rotation;
+        }
+        //If current player is 3rd place
+        else if(playerID == scoreManager.topScoresID[2])
+        {
+            //Move current player to 3rd place spawn point
+            rig.transform.position = SpawnManager.instance.spawnPoints[2].position;
+            rig.transform.rotation = SpawnManager.instance.spawnPoints[2].rotation;
+        }
+        //If current player is not in top 3 players
+        else{
+            //Move current player to podium audience spawn point
+            rig.transform.position = SpawnManager.instance.spawnPoints[3].position;
+            rig.transform.rotation = SpawnManager.instance.spawnPoints[3].rotation;
+        }
+    }
+
+    //Transitions to end game podium state
     public void swapToPodium()
     {
         disableObjects();
         enableObjects();
         addSpawnPointsToManager();
-        drumRoll.Play();
+        movePlayerToPodium();
+        podiumSound.Play();
     }
 }

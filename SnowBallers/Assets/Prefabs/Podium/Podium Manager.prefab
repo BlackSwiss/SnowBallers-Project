@@ -61,9 +61,7 @@ MonoBehaviour:
   - {fileID: 6909012556467749814}
   - {fileID: 6909012556344501212}
   - {fileID: 6909012558384130173}
-  spawnManager: {fileID: 0}
-  scoreManager: {fileID: 0}
-  drumRoll: {fileID: 0}
+  podiumSound: {fileID: 0}
 --- !u!1001 &1448764392923684841
 PrefabInstance:
   m_ObjectHideFlags: 0
