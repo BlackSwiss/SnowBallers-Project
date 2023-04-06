@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon;
+using Photon.Pun;
 
 public class Snowball : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Snowball : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Headshot")
+        if(collision.gameObject.tag == "Headshot" && ownersID != collision.gameObject.GetComponent<PhotonView>().OwnerActorNr)
         {
             Debug.Log("Player headshot!");
             //This will prevent a snowball that no one threw to do damage
@@ -47,7 +48,7 @@ public class Snowball : MonoBehaviour
             bonk.Play();
             dizzy.Play();
         }
-        else if(collision.gameObject.tag == "Player")
+        else if(collision.gameObject.tag == "Player" && ownersID != collision.gameObject.GetComponent<PhotonView>().OwnerActorNr)
         {
             Debug.Log("Player hit!");
             //This will prevent a snowball that no one threw to do damage
