@@ -305,11 +305,7 @@ MonoBehaviour:
   - {fileID: 1667637670816961770}
   - {fileID: 1556406439555993401}
   - {fileID: 2978592672928381445}
-<<<<<<< Updated upstream
   - {fileID: 4042618286757332273}
-=======
-  - {fileID: 7846603677340080026}
->>>>>>> Stashed changes
   - {fileID: 8796504908071821374}
   - {fileID: 7581598379613041564}
   sceneViewId: 0
@@ -564,11 +560,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6141592221698828215, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: m_Constraints
-      value: 0
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 6141592221698828215, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
@@ -577,7 +573,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6141592221698828169, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
   m_PrefabInstance: {fileID: 1658335220481388319}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7846603677340080026
+--- !u!114 &4042618286757332273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,13 +582,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4771782121857927318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!4 &4771782121857927340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6141592221698828211, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
