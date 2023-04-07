@@ -61,6 +61,7 @@ MonoBehaviour:
   - {fileID: 6909012556467749814}
   - {fileID: 6909012556344501212}
   - {fileID: 6909012558384130173}
+  - {fileID: 3301626081243653554}
   podiumSound: {fileID: 0}
 --- !u!1001 &1448764392923684841
 PrefabInstance:
@@ -206,6 +207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50c39db1df0a7cc449ec6b3b0f150553, type: 3}
+--- !u!4 &3301626081243653554 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4164335315443295947, guid: 50c39db1df0a7cc449ec6b3b0f150553, type: 3}
+  m_PrefabInstance: {fileID: 1448764394529735545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6909012556344501212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5474888249133326501, guid: 50c39db1df0a7cc449ec6b3b0f150553, type: 3}
