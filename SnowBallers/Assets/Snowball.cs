@@ -14,6 +14,8 @@ public class Snowball : MonoBehaviour
 
     public int ownersID = 0;
 
+    public int scoreCount = 1;
+
     private void Start()
     {
         initialPos = gameObject.transform.position;        
@@ -54,7 +56,7 @@ public class Snowball : MonoBehaviour
             //This will prevent a snowball that no one threw to do damage
             if (ownersID != 0)
             {
-                ScoreEvents.current.playerHit(ownersID);
+                ScoreEvents.current.playerHit(ownersID, scoreCount);
                 Debug.Log("Hit");
             }
 

@@ -12,13 +12,13 @@ public class ScoreEvents : MonoBehaviour
         current = this;
     }
 
-    public event Action<int> onPlayerHit;
+    public event Action<int,int> onPlayerHit;
 
-    public void playerHit(int ownerID)
+    public void playerHit(int ownerID, int scoreAmount)
     {
         if(onPlayerHit != null)
         {
-            onPlayerHit(ownerID);
+            onPlayerHit(ownerID, scoreAmount);
         }
     }
 

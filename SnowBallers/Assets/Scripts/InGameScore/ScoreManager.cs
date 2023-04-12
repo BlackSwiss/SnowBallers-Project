@@ -92,7 +92,7 @@ public class ScoreManager : MonoBehaviourPun
 
 
     //Find and increment correct score
-    public void incrementScore(int ownerID)
+    public void incrementScore(int ownerID, int scoreCount)
     {
         foreach (GameObject playerScore in playerScores)
         {
@@ -102,7 +102,8 @@ public class ScoreManager : MonoBehaviourPun
             {
                 Debug.Log("Someone hit, incrementing score to " + ownerID);
                 //Use the increment score script on object itself
-                scoreScript.incrementScore();
+                for(int i = 0; i < scoreCount; i++)
+                    scoreScript.incrementScore();
             }
         }
     }
