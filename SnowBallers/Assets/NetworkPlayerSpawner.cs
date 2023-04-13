@@ -22,7 +22,6 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     private Transform rightHandRig;
 
     // Vars for timer
-    ExitGames.Client.Photon.Hashtable customValue;
     double startTime;
     double timerIncrement;
     double roundTime = 10;
@@ -30,7 +29,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     bool isTimerSet = false;
     bool isTimerOver = false;
     int timeBeforeKicked = 15;
-    //public  PhotonView photonView;
+    const int NumPlayersToStartMatch = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -89,14 +88,11 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         players.Add(spawnedPlayerPrefab);
         Debug.Log("Player added to list");
 
-        // Have second player start timer setting
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        // Have second player start timer setting for all players
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= NumPlayersToStartMatch)
         {
-            customValue = new ExitGames.Client.Photon.Hashtable();
-            startTime = PhotonNetwork.Time;
-            customValue.Add("StartTime", startTime);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(customValue);
-            isTimerSet = true;
+            GameObject networkPlayer = GameObject.Find("Network Manager");
+            networkPlayer.GetComponent<PhotonView>().RPC("SetTimer", RpcTarget.AllBuffered);
         }
     }
 
@@ -137,5 +133,17 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public void KickPlayersFromRoom()
     {
         Invoke(nameof(LeaveRoom), timeBeforeKicked);
+    }
+
+    [PunRPC]
+    public void SetTimer()
+    {
+        startTime = PhotonNetwork.Time;
+        isTimerSet = true;
+    }
+
+    public double getTimerDecrement()
+    {
+        return timerDecrement;
     }
 }
