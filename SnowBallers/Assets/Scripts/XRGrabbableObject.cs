@@ -8,15 +8,20 @@ using Photon.Realtime;
 public class XRGrabbableObject : XRBaseInteractable
 {
     [SerializeField]
-    private GameObject grabbableObject;
+    private GameObject[] grabbableObject;
+
+    int randomInt;
+    GameObject currentSnowball;
 
     [SerializeField]
     private Transform transformToInstantiate;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
+        randomInt = Random.Range(0, grabbableObject.Length);
+        currentSnowball = grabbableObject[randomInt];
         // Instantiate object
-        GameObject newObject = PhotonNetwork.Instantiate("Snowball", transformToInstantiate.position, Quaternion.identity);
+        GameObject newObject = PhotonNetwork.Instantiate(currentSnowball.name, transformToInstantiate.position, Quaternion.identity);
 
         // Get grab interactable from prefab
         XRGrabInteractable objectInteractable = newObject.GetComponent<XRGrabInteractable>();
@@ -26,4 +31,6 @@ public class XRGrabbableObject : XRBaseInteractable
 
         base.OnSelectEntered(args);
     }
+
+    
 }

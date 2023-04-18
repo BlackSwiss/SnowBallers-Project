@@ -23,4 +23,10 @@ public class XRGrabNetworkInteractable : XRGrabInteractable
         photonView.RequestOwnership();
         base.OnSelectEntered(interactor);
     }
+
+    protected override void OnSelectExited(XRBaseInteractor interactor)
+    {
+        Debug.Log("Let go");
+        base.OnSelectExited(interactor);
+    }
 }

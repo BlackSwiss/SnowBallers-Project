@@ -17,8 +17,9 @@ GameObject:
   - component: {fileID: 1573434516138434984}
   - component: {fileID: 1573434516138434992}
   - component: {fileID: 1573434516138435007}
+  - component: {fileID: 3794612038140584671}
   m_Layer: 0
-  m_Name: Snowball
+  m_Name: Slowball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 35917a1a2e0b0d246ba09ba260186f88, type: 2}
+  - {fileID: 2100000, guid: fe20e7259854c3e4a97ca7c7bc663862, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -290,3 +291,15 @@ MonoBehaviour:
   initialPos: {x: 0, y: 0, z: 0}
   ownersID: 0
   scoreCount: 1
+--- !u!75 &3794612038140584671
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573434516138434985}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 9, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
