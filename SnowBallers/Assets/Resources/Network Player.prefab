@@ -492,12 +492,36 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: grabbableObject.Array.size
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: grabbableObject.Array.data[0]
       value: 
       objectReference: {fileID: 1573434516138434985, guid: 21ce0126187d9a14fadb1f9806db3364, type: 3}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: grabbableObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 1573434516138434985, guid: 46a2136fe1459db4ab8cbadebd59552b, type: 3}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: grabbableObject.Array.data[2]
+      value: 
+      objectReference: {fileID: 1573434516138434985, guid: a0e2df5afa3728c40bd3c355efc4c57e, type: 3}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: grabbableObject.Array.data[3]
+      value: 
+      objectReference: {fileID: 1573434516138434985, guid: d104801260b609b47a11e40fe7a76995, type: 3}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: grabbableObject.Array.data[4]
+      value: 
+      objectReference: {fileID: 1573434516138434985, guid: e08d564831b80c844a47255fb8a1505c, type: 3}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: grabbableObject.Array.data[5]
+      value: 
+      objectReference: {fileID: 1573434516138434985, guid: 2b26d65c0f0c3a24cbbbfc8d8e912341, type: 3}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: grabbableObject.Array.data[6]
+      value: 
+      objectReference: {fileID: 1573434516138434985, guid: 7ba18a422975cfe4296ae02787533ebd, type: 3}
     - target: {fileID: 6141592221698828169, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: m_Name
       value: Ground Test Grabbing
