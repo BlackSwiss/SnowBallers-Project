@@ -20,9 +20,10 @@ public class BotAI : MonoBehaviour
     public List<GameObject> players;
 
     //Dodging
-    public Vector3 walkPoint;
+    public Vector3 walkPoint, destination;
     bool walkPointSet;
     public float walkPointRange;
+    NavMeshHit hit;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -41,6 +42,8 @@ public class BotAI : MonoBehaviour
     private Collider[] Colliders = new Collider[5];
     //Hiding test
     public int ammoCount = 3;
+    public Vector3 distanceToHidePoint, distanceToHidePoint2;
+    bool hidePointSet, hidePointSet2;
 
     //States
     public float sightRange;
@@ -112,7 +115,7 @@ public class BotAI : MonoBehaviour
             }
             else
             {
-                //Debug.Log("Bot Dodging");
+                Debug.Log("Bot Dodging");
                 modelAnimator.SetBool("Move", false);
                 Dodging();
             }
@@ -125,13 +128,18 @@ public class BotAI : MonoBehaviour
             SearchWalkPoint(); 
 
         if (walkPointSet)
+            {
             agent.SetDestination(walkPoint);
-
+            Debug.DrawRay(walkPoint, Vector3.up, Color.blue, 1.0f);
+            }
+        
         //Calculate distance to walkpoint
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //walkpoint reached
-        if(distanceToWalkPoint.magnitude < 0.1f)
+        //#update increase to 0.5, issue with y-axis changing slightly higher 
+        // making walkpoint impossible to reach (might need to increase)
+        if(distanceToWalkPoint.magnitude < 0.5f)
         {
             walkPointSet = false;
             Vector3 walkPointNoY = new Vector3(transform.position.x, modelTransform.position.y, transform.position.z);
@@ -145,11 +153,15 @@ public class BotAI : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
+
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        //Search for random point on map within bounds
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        //Search for random point on map within bounds 
+        //#update 4/20/23 - changed to using samplePosition to confirm a walkpoint on the navmesh
+        // had an issue with getting stuck when walkpoint was out of bounds.
+        if (NavMesh.SamplePosition(walkPoint, out hit, 1.0f, NavMesh.AllAreas))
         {
+            walkPoint = new Vector3(hit.position.x, transform.position.y, hit.position.z);
             walkPointSet = true;
 
             //Make bot look at player
@@ -222,9 +234,19 @@ public class BotAI : MonoBehaviour
     {
 
         
-            int hits = Physics.OverlapSphereNonAlloc(agent.transform.position, LineOfSightChecker.Collider.radius, Colliders, HidableLayers);
-            Debug.Log($"number of hiding spots: {hits}");
+        int hits = Physics.OverlapSphereNonAlloc(agent.transform.position, LineOfSightChecker.Collider.radius, Colliders, HidableLayers);
+        Debug.Log($"number of hiding spots: {hits}");
 
+        if ((hidePointSet || hidePointSet2) && ((distanceToHidePoint.magnitude < 0.1f) || (distanceToHidePoint2.magnitude < 0.1f)))
+        {
+            Debug.Log("bot reloaded");
+            ammoCount = 3;
+            hidePointSet = false;
+            hidePointSet2 = false;
+            ResetAttack();
+        }
+        else
+        {    
             for (int i = 0; i < hits; i++)
             {
                 if (NavMesh.SamplePosition(Colliders[i].transform.position, out NavMeshHit hit, 2f, agent.areaMask))
@@ -238,17 +260,18 @@ public class BotAI : MonoBehaviour
                     {
                         Debug.Log("Hiding spot found");
                         agent.SetDestination(hit.position);
+                        hidePointSet = true;
 
                         //Calculate distance to walkpoint
                         Vector3 distanceToHidePoint = transform.position - hit.position;
 
                         //walkpoint reached
-                        if(distanceToHidePoint.magnitude < 0.1f)
-                        {
-                            Debug.Log("bot reloaded");
-                            ammoCount = 3;
-                            ResetAttack();
-                        }  
+                        //if(distanceToHidePoint.magnitude < 0.1f)
+                        //{
+                        //    Debug.Log("bot reloaded");
+                        //    ammoCount = 3;
+                        //    ResetAttack();
+                        //}  
                         break;
                     }
                     else
@@ -265,17 +288,18 @@ public class BotAI : MonoBehaviour
                             {
                                 Debug.Log("Hiding spot2 found");
                                 agent.SetDestination(hit2.position);
+                                hidePointSet2 = true;
 
                                 //Calculate distance to walkpoint
                                 Vector3 distanceToHidePoint2 = transform.position - hit2.position;
 
                                 //walkpoint reached
-                                if(distanceToHidePoint2.magnitude < 0.1f)
-                                {
-                                    Debug.Log("bot reloaded2");
-                                    ammoCount = 3;
-                                    ResetAttack();
-                                }
+                                //if(distanceToHidePoint2.magnitude < 0.1f)
+                                // {
+                                //    Debug.Log("bot reloaded2");
+                                //    ammoCount = 3;
+                                //   ResetAttack();
+                                //}
                                 break;
                             }
                         }
@@ -286,5 +310,6 @@ public class BotAI : MonoBehaviour
                     Debug.LogError($"Unable to find NavMesh near object {Colliders[i].name} at {Colliders[i].transform.position}");
                 }
             }
+        }
     }
 }
