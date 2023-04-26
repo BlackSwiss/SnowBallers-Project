@@ -32,7 +32,6 @@ public class BotAI : MonoBehaviour
     public float attackHorizontalVelocity = 10;
     public float attackVerticalVelocity = 5;
     public float attackAnimationDelay = 1.85f;
-    public float enableIKDelay = 1;
 
     //Hiding
     public LayerMask HidableLayers;
@@ -56,7 +55,13 @@ public class BotAI : MonoBehaviour
     private Transform modelTransform;
     private Animator modelAnimator;
     private RigBuilder modelRigBuilder;
+    public Transform modelRightHandTransform;
 
+    //Rotation
+    float speed = 0.01f;
+    float timeCount = 0.0f;
+    bool isChaseOrAttack = false;
+    
     void Start()
     {
         modelTransform = model.transform;
@@ -73,6 +78,8 @@ public class BotAI : MonoBehaviour
     // Check if player is in Sight
     private void Update()
     {
+        syncModelTransform();
+
         if (players.Count > 0)
         {
             player = players[0].transform;
@@ -82,7 +89,8 @@ public class BotAI : MonoBehaviour
         playerInSightRange  = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        
+        if(isChaseOrAttack)
+            lookAtPlayer();
 
         if(alreadyAttacked)
         {
@@ -90,6 +98,7 @@ public class BotAI : MonoBehaviour
             modelAnimator.SetBool("Throw", false);
             modelAnimator.SetBool("Move", false);
             Dodging();
+            isChaseOrAttack = false;
         }
         else
         {
@@ -105,19 +114,21 @@ public class BotAI : MonoBehaviour
                 modelAnimator.SetBool("Throw", true);
                 Invoke(nameof(AttackPlayer), attackAnimationDelay);
                 ammoCount -= 1;
-                Invoke(nameof(ResetIKTracking), enableIKDelay);
+                isChaseOrAttack = true;
             }
             else if(playerInSightRange)
             {
                 Debug.Log("Bot Chasing");
                 modelAnimator.SetBool("Move", true);
                 ChasePlayer();
+                isChaseOrAttack = true;
             }
             else
             {
                 Debug.Log("Bot Dodging");
                 modelAnimator.SetBool("Move", false);
                 Dodging();
+                isChaseOrAttack = false;
             }
         }
     }
@@ -142,8 +153,8 @@ public class BotAI : MonoBehaviour
         if(distanceToWalkPoint.magnitude < 0.5f)
         {
             walkPointSet = false;
-            Vector3 walkPointNoY = new Vector3(transform.position.x, modelTransform.position.y, transform.position.z);
-            modelTransform.position = walkPointNoY;
+            //Vector3 walkPointNoY = new Vector3(transform.position.x, modelTransform.position.y, transform.position.z);
+            //modelTransform.position = walkPointNoY;
         }  
     }
 
@@ -166,13 +177,13 @@ public class BotAI : MonoBehaviour
 
             //Make bot look at player
             //transform.LookAt(new Vector3(walkPoint.x, transform.position.y, walkPoint.z));
-            transform.LookAt(walkPoint);
+            //transform.LookAt(walkPoint);
         }
     }
 
     private void ChasePlayer()
     {
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+        //transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
         agent.SetDestination(player.position);
     }
 
@@ -182,33 +193,26 @@ public class BotAI : MonoBehaviour
         if(!agent.isOnNavMesh)
             return;
 
-        //Store old position and rotation to reset after attack
-        Vector3 oldPosition = transform.position;
-        Quaternion oldRotation = transform.rotation;
-        
         //Make sure bot doesn't move
         agent.SetDestination(transform.position);
 
         //Make bot look at player
         //transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-        transform.LookAt(player);
+        //transform.LookAt(player);
 
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
 
             //Attack code ***need to write AIs own snowball code
-            GameObject newSnowball = Instantiate(snowball, transform.position, Quaternion.identity);
+            GameObject newSnowball = Instantiate(snowball, modelRightHandTransform.position, Quaternion.identity);
             Rigidbody rb = newSnowball.GetComponent<Rigidbody>();
-            rb.AddForce(modelTransform.forward * attackHorizontalVelocity, ForceMode.Impulse);
-            rb.AddForce(modelTransform.up * attackVerticalVelocity, ForceMode.Impulse);
+            rb.AddForce(transform.forward * attackHorizontalVelocity, ForceMode.Impulse);
+            rb.AddForce(transform.up * attackVerticalVelocity, ForceMode.Impulse);
             Destroy(newSnowball, 5);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            Invoke(nameof(ResetIKTracking), attackAnimationDelay);
         }
-
-        //Resets position and rotation once attack is complete
-        transform.position =  oldPosition;
-        transform.rotation = oldRotation;
     }
 
     private void ResetAttack()
@@ -219,6 +223,28 @@ public class BotAI : MonoBehaviour
     private void ResetIKTracking()
     {
         modelRigBuilder.enabled = true;
+        isChaseOrAttack = false;
+    }
+
+    private void syncModelTransform()
+    {
+        //Get parent transform without Y component since model is positioned lower than parent
+        Vector3 transformNoY = new Vector3(transform.position.x, modelTransform.position.y, transform.position.z);
+        //Sync parent transform and model transform
+        modelTransform.position = transformNoY;
+        modelTransform.rotation = transform.rotation;
+    }
+
+    private void lookAtPlayer()
+    {
+        transform.LookAt(player);
+    }
+
+    private void lookAtTarget(Vector3 target)
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(target, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, timeCount * speed);
+        timeCount = timeCount + Time.deltaTime;
     }
 
     //visualize bot sight range

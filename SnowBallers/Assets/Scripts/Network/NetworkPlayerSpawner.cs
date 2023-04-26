@@ -24,7 +24,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     // Vars for timer
     double startTime;
     double timerIncrement;
-    double roundTime = 10;
+    double roundTime = 60;
     double timerDecrement;
     bool isTimerSet = false;
     bool isTimerOver = false;

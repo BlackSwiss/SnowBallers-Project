@@ -22,8 +22,8 @@ TagManager:
   - GrabLayer
   - HideLayer
   - LineOfSight
-  - 
-  - 
+  - HUD
+  - Invisible
   - 
   - 
   - 
