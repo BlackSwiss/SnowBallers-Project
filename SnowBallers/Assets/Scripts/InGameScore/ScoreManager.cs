@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviourPun
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> playerScores = new List<GameObject>();
     public GameObject ScoreHolder;
+    public GameObject ScoreHolderHUD;
     public AudioSource gameOverSound;
 
     //Variables for end game podium
@@ -75,8 +76,10 @@ public class ScoreManager : MonoBehaviourPun
 
         //Create the player score on scoreboard and add it to list of scores
         GameObject playerScore = PhotonNetwork.Instantiate("Player Score",transform.position,transform.rotation);
+        GameObject playerScoreHUD = PhotonNetwork.Instantiate("Player Score",transform.position,transform.rotation);
         //Set the parent of the score to the scoreholder
         playerScore.GetPhotonView().RPC("setParentPhoton", RpcTarget.AllBuffered, "Score Holder");
+        playerScoreHUD.GetPhotonView().RPC("setParentPhoton", RpcTarget.AllBuffered, "Score Holder HUD");
         Debug.Log("RPC Called");
 
         //playerScores.Add(playerScore);
@@ -84,10 +87,12 @@ public class ScoreManager : MonoBehaviourPun
 
         //Rebuild the layout group so our ui doesnt overlap
         ScoreHolder.GetPhotonView().RPC("rebuildLayout", RpcTarget.AllBuffered);
+        ScoreHolderHUD.GetPhotonView().RPC("rebuildLayout", RpcTarget.AllBuffered);
 
         //Add the player id to this specific score listing 
         //playerScore.GetComponent<PlayerScore>().syncPlayerID(player.GetComponent<NetworkPlayer>().playerID);
         playerScore.GetPhotonView().RPC("syncPlayerID",RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.ActorNumber);
+        playerScoreHUD.GetPhotonView().RPC("syncPlayerID",RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.ActorNumber);
     }
 
 

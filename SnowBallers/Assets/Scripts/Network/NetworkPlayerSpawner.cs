@@ -29,7 +29,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     bool isTimerSet = false;
     bool isTimerOver = false;
     int timeBeforeKicked = 15;
-    const int NumPlayersToStartMatch = 2;
+    const int NumPlayersToStartMatch = 1;
 
     // Start is called before the first frame update
     void Start()

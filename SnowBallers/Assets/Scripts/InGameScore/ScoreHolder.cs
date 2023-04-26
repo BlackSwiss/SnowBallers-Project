@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scoreHolder : MonoBehaviourPun
+public class ScoreHolder : MonoBehaviourPun
 {
     // Start is called before the first frame update
     void Start()
