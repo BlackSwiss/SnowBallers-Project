@@ -289,3 +289,4 @@ MonoBehaviour:
   dizzy: {fileID: 2535571729470389673, guid: 35c82bc09d039304a872fc568b0b3615, type: 3}
   initialPos: {x: 0, y: 0, z: 0}
   ownersID: 0
+  scoreCount: 1
