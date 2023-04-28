@@ -30,7 +30,7 @@ public class BotAI : MonoBehaviour
     bool alreadyAttacked;
     public GameObject snowball;
     public float attackHorizontalVelocity = 10;
-    public float attackVerticalVelocity = 5;
+    public float attackVerticalVelocity = 0;
     public float attackAnimationDelay = 1.85f;
 
     //Hiding
@@ -61,13 +61,15 @@ public class BotAI : MonoBehaviour
     float speed = 0.01f;
     float timeCount = 0.0f;
     bool isChaseOrAttack = false;
-    
+    Vector3 oldPosition;
+
     void Start()
     {
         modelTransform = model.transform;
         modelAnimator = model.GetComponent<Animator>();
         players = networkPlayerSpawner.getPlayers();
         modelRigBuilder = GetComponentInChildren<RigBuilder>();
+        oldPosition = transform.position;
     }
 
     private void Awake()
@@ -92,9 +94,12 @@ public class BotAI : MonoBehaviour
         if(isChaseOrAttack)
             lookAtPlayer();
 
-        if(alreadyAttacked)
+        //Added a check for when the bot movement gets stuck by something blocking its path
+        //If so, the bot will default to dodge
+        if(alreadyAttacked || oldPosition == transform.position)
         {
             //Debug.Log("Bot Dodging");
+            agent.ResetPath();
             modelAnimator.SetBool("Throw", false);
             modelAnimator.SetBool("Move", false);
             Dodging();
@@ -131,6 +136,7 @@ public class BotAI : MonoBehaviour
                 isChaseOrAttack = false;
             }
         }
+        oldPosition = transform.position;
     }
 
     private void Dodging()
