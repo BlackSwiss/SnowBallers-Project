@@ -77,6 +77,13 @@ public class PodiumManager : MonoBehaviour
         }
     }
 
+    private void disableMovement()
+    {
+        GameObject locomotion = GameObject.Find("Locomotion System");
+        ActionBasedContinuousMoveProvider moveProvider = locomotion.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
+        moveProvider.enabled = false;
+    }
+
     //Transitions to end game podium state
     public void swapToPodium()
     {
@@ -84,6 +91,7 @@ public class PodiumManager : MonoBehaviour
         enableObjects();
         addSpawnPointsToManager();
         movePlayerToPodium();
+        disableMovement();
         podiumSound.Play();
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using UnityEngine.UI;
+using UnityEngine.XR;
+using Unity.XR.CoreUtils;
 
 public class ScoreManager : MonoBehaviourPun
 {
@@ -18,12 +20,19 @@ public class ScoreManager : MonoBehaviourPun
     public int[] topScoresID = {-1,-1,-1};
     public bool gameOver = false;
 
+    //Variables for outro cutscene
+    public GameObject playerInitialCamera;
+    public GameObject playerFinalCamera;
+    public GameObject outro;
+    private Transform mainCamera;
+
     // Start is called before the first frame update
     void Start()
     {
         ScoreEvents.current.onPlayerHit += incrementScore;
         ScoreEvents.current.onHeadshot += incrementScoreHeadshot;
-        //Invoke(nameof(endGame), 5);
+        mainCamera = FindObjectOfType<XROrigin>().transform.Find("Camera Offset/Main Camera");
+        //Invoke(nameof(endGame), 1);
     }
 
     // Update is called once per frame
@@ -135,6 +144,9 @@ public class ScoreManager : MonoBehaviourPun
     {
         PodiumManager podiumManager = FindObjectOfType<PodiumManager>();
         podiumManager.swapToPodium();
+        playerFinalCamera.transform.position = mainCamera.position;
+        playerFinalCamera.transform.rotation = mainCamera.rotation;
+        outro.SetActive(true);
     }
 
     //Transitions to end game state
@@ -143,6 +155,8 @@ public class ScoreManager : MonoBehaviourPun
         Debug.Log("Game over, transitioning to end game podium");
         gameOver = true;
         gameOverSound.Play();
+        playerInitialCamera.transform.position = mainCamera.position;
+        playerInitialCamera.transform.rotation = mainCamera.rotation;
         //Delays transition by 5 seconds to allow gameOverSound to finish playing
         Invoke(nameof(endGameInvoke), 5);
     }
