@@ -3808,6 +3808,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2640087508105911703, guid: 805f9a0ccdfe41043ada1c4de08a598b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908989789624483507, guid: 805f9a0ccdfe41043ada1c4de08a598b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8764353173076655192, guid: 805f9a0ccdfe41043ada1c4de08a598b, type: 3}
       propertyPath: m_Intensity
       value: 4.64
@@ -4009,6 +4017,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PS4Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 3458605213611837959, guid: 2671c371981ef824787370a97c1479cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3458605213611838008, guid: 2671c371981ef824787370a97c1479cf, type: 3}
       propertyPath: player
       value: 
@@ -4021,6 +4033,10 @@ PrefabInstance:
       propertyPath: rightController
       value: 
       objectReference: {fileID: 1108315116}
+    - target: {fileID: 3458605213611838008, guid: 2671c371981ef824787370a97c1479cf, type: 3}
+      propertyPath: terrainLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 3458605213611838009, guid: 2671c371981ef824787370a97c1479cf, type: 3}
       propertyPath: m_RootOrder
       value: 11

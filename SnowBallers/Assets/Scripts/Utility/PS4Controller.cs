@@ -10,7 +10,10 @@ public class PS4Controller : MonoBehaviour
     public GameObject player;
     public GameObject leftController;
     public GameObject rightController;
-    public GameObject model;
+    public LayerMask terrainLayer;
+    public LayerToggleManager hudManager;
+    public LayerToggleManager menuManager;
+    private float minY;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,8 @@ public class PS4Controller : MonoBehaviour
             }
         }
         Debug.Log("No PS4 Controller is plugged in");
+
+        minY = player.transform.position.y;
     }
 
     // Update is called once per frame
@@ -35,42 +40,47 @@ public class PS4Controller : MonoBehaviour
             //Movement
             if(gamepad.leftStick.left.IsPressed())
             {
-                player.transform.Translate(Vector3.left * Time.deltaTime * 5f);
+                player.transform.Translate(Vector3.left * Time.deltaTime * 5f, Space.Self);
             }
             else if(gamepad.leftStick.right.IsPressed())
             {
-                player.transform.Translate(Vector3.right * Time.deltaTime * 5f);
+                player.transform.Translate(Vector3.right * Time.deltaTime * 5f, Space.Self);
             }
             else if(gamepad.leftStick.up.IsPressed())
             {
-                player.transform.Translate(Vector3.forward * Time.deltaTime * 5f);
+                player.transform.Translate(Vector3.forward * Time.deltaTime * 5f, Space.Self);
             }
             else if(gamepad.leftStick.down.IsPressed())
             {
-                player.transform.Translate(Vector3.back * Time.deltaTime * 5f);
+                player.transform.Translate(Vector3.back * Time.deltaTime * 5f, Space.Self);
             }
-            else if(gamepad.leftStickButton.IsPressed())
+
+
+            //Stop player from going below initial Y position
+            Ray ray = new Ray(player.transform.position, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, 10, terrainLayer.value))
             {
-                player.transform.position = new Vector3(0,1.25f,-2);
+                minY = hit.point.y + 1.25f;
             }
+            player.transform.position = new Vector3(player.transform.position.x, minY, player.transform.position.z);
 
 
             //Rotation
             if(gamepad.rightStick.left.IsPressed())
             {
-                player.transform.Rotate(Vector3.down * Time.deltaTime * 100f, Space.World);
+                player.transform.Rotate(Vector3.down * Time.deltaTime * 150f, Space.World);
             }
             else if(gamepad.rightStick.right.IsPressed())
             {
-                player.transform.Rotate(Vector3.up * Time.deltaTime * 100f, Space.World);
+                player.transform.Rotate(Vector3.up * Time.deltaTime * 150f, Space.World);
             }
             else if(gamepad.rightStick.up.IsPressed())
             {
-                player.transform.Rotate(Vector3.left * Time.deltaTime * 100f, Space.World);
+                player.transform.Rotate(Vector3.left * Time.deltaTime * 150f, Space.Self);
             }
             else if(gamepad.rightStick.down.IsPressed())
             {
-                player.transform.Rotate(Vector3.right * Time.deltaTime * 100f, Space.World);
+                player.transform.Rotate(Vector3.right * Time.deltaTime * 150f, Space.Self);
             }
             else if(gamepad.rightStickButton.IsPressed())
             {
@@ -79,7 +89,7 @@ public class PS4Controller : MonoBehaviour
 
 
             //Interaction
-            else if(gamepad.rightTrigger.IsPressed())
+            if(gamepad.rightTrigger.IsPressed())
             {
                 //InputDevice left = leftController.GetComponent<XRController>();
                 //left.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue);
@@ -90,23 +100,23 @@ public class PS4Controller : MonoBehaviour
                 //left.TryGetFeatureValue(CommonUsages.grip, out float gripValue);
             }
 
-            //Dpad IK
-            else if(gamepad.dpad.left.IsPressed())
+            //Hud
+            if(gamepad.selectButton.IsPressed())
             {
-                model.transform.Translate(Vector3.left * Time.deltaTime * 5f);
+                if(hudManager != null)
+                {
+                    hudManager.toggleLayer();
+                }
             }
-            else if(gamepad.dpad.right.IsPressed())
+            //Menu
+            else if(gamepad.startButton.IsPressed())
             {
-                model.transform.Translate(Vector3.right * Time.deltaTime * 5f);
+                if(menuManager != null)
+                {
+                    menuManager.toggleLayer();
+                }
             }
-            else if(gamepad.dpad.up.IsPressed())
-            {
-                model.transform.Translate(Vector3.forward * Time.deltaTime * 5f);
-            }
-            else if(gamepad.dpad.down.IsPressed())
-            {
-                model.transform.Translate(Vector3.back * Time.deltaTime * 5f);
-            }
+
 
             else
             {
