@@ -47,3 +47,6 @@ MonoBehaviour:
   player: {fileID: 0}
   leftController: {fileID: 0}
   rightController: {fileID: 0}
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 64

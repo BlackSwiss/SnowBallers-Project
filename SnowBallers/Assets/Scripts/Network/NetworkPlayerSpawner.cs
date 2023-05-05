@@ -112,7 +112,8 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     public void LeaveRoom() 
     {
-        PhotonNetwork.LeaveRoom();
+        if(PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
     }
 
     public List<GameObject> getPlayers()

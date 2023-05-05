@@ -337,7 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8868502942000762306}
-  - component: {fileID: 5552051892566696222}
+  - component: {fileID: 374865432594064091}
   m_Layer: 6
   m_Name: HUD Manager
   m_TagString: Untagged
@@ -360,7 +360,7 @@ Transform:
   m_Father: {fileID: 2867549276038488332}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5552051892566696222
+--- !u!114 &374865432594064091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,12 +369,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8066861675417603983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37dfe2088e0a0ea4e855253cf7e67897, type: 3}
+  m_Script: {fileID: 11500000, guid: 096dea4041b0a464e88ea9d2e6db3282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 2867549276038488334}
-  canvas: {fileID: 2867549276586796044}
   controllerCharacteristics: 320
+  viewableLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &8705161886511406474
 GameObject:
   m_ObjectHideFlags: 0
