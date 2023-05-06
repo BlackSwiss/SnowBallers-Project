@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
     public float maxHealth = 10;
     public float currentHealth;
 
+    public NetworkPlayer networkPlayer;
+
     public Animator animate;
 
     // Start is called before the first frame update

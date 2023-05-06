@@ -33,7 +33,7 @@ public class NetworkPlayer : MonoBehaviour
         leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
         rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
         bagRig = rig.transform.Find("Camera Offset/BagLoc");
-        bagRig.transform.localPosition = new Vector3(0.275999993f, 0.287f, 0.104999997f);
+        bagRig.transform.localPosition = new Vector3(0.275999993f, -.2f, 0.104999997f);
 
         if (photonView.IsMine)
         {
