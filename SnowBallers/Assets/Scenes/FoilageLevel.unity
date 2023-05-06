@@ -4973,8 +4973,7 @@ MonoBehaviour:
   topScores: ffffffffffffffffffffffff
   topScoresID: ffffffffffffffffffffffff
   gameOver: 0
-  playerInitialCamera: {fileID: 0}
-  playerFinalCamera: {fileID: 0}
+  playerPOVCamera: {fileID: 754345220}
   outro: {fileID: 933291245}
 --- !u!4 &996118411
 Transform:
