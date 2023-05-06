@@ -492,6 +492,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 7296940332592828070}
     m_Modifications:
     - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: m_SelectMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: grabbableObject.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -588,6 +592,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6141592221698828214, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141592221698828214, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141592221698828214, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141592221698828214, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -597,6 +613,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6141592221698828215, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141592221698828215, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

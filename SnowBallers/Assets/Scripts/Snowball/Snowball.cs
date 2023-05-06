@@ -22,67 +22,70 @@ public class Snowball : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Player ID: " + collision.gameObject.GetComponent<Health>().networkPlayer.playerID
-            + "Actor number: " + PhotonNetwork.LocalPlayer.ActorNumber);
-
-        if(collision.gameObject.GetComponent<Health>().networkPlayer.playerID == PhotonNetwork.LocalPlayer.ActorNumber)
+        if (collision.gameObject.GetComponent<Health>().networkPlayer)
         {
-            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.collider);
-        }
-        if(collision.gameObject.tag == "Headshot" && collision.gameObject.GetComponent<Health>().networkPlayer.playerID != PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-            Debug.Log("Player headshot!");
-            //This will prevent a snowball that no one threw to do damage
-            if (ownersID != 0)
-            {
-                ScoreEvents.current.headshot(ownersID);
-                Debug.Log("Headshot");
-            }
+            Debug.Log("Player ID: " + collision.gameObject.GetComponent<Health>().networkPlayer.playerID
+                + "Actor number: " + PhotonNetwork.LocalPlayer.ActorNumber);
 
-            if (collision.gameObject.GetComponent<Health>())
+            if (collision.gameObject.GetComponent<Health>().networkPlayer.playerID == PhotonNetwork.LocalPlayer.ActorNumber)
             {
-                //collision.gameObject.GetComponent<Health>().decreaseHealth(1);
-                collision.gameObject.GetComponent<Health>().hitAnimation();
+                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.collider);
             }
-            //if(collision.gameObject.GetComponent<ChangeColor>())
-            if (collision.gameObject.GetComponent<ChangeColor>())
-                collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
-                
-
-            foreach (Transform c in transform)
+            if (collision.gameObject.tag == "Headshot" && collision.gameObject.GetComponent<Health>().networkPlayer.playerID != PhotonNetwork.LocalPlayer.ActorNumber)
             {
-                c.gameObject.GetComponent<ParticleSystem>().Play();
-            }
+                Debug.Log("Player headshot!");
+                //This will prevent a snowball that no one threw to do damage
+                if (ownersID != 0)
+                {
+                    ScoreEvents.current.headshot(ownersID);
+                    Debug.Log("Headshot");
+                }
 
-            bonk.Play();
-            dizzy.Play();
-        }
-        else if(collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<Health>().networkPlayer.playerID != PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-            Debug.Log("Player hit!");
-            //This will prevent a snowball that no one threw to do damage
-            if (ownersID != 0)
+                if (collision.gameObject.GetComponent<Health>())
+                {
+                    //collision.gameObject.GetComponent<Health>().decreaseHealth(1);
+                    collision.gameObject.GetComponent<Health>().hitAnimation();
+                }
+                //if(collision.gameObject.GetComponent<ChangeColor>())
+                if (collision.gameObject.GetComponent<ChangeColor>())
+                    collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
+
+
+                foreach (Transform c in transform)
+                {
+                    c.gameObject.GetComponent<ParticleSystem>().Play();
+                }
+
+                bonk.Play();
+                dizzy.Play();
+            }
+            else if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<Health>().networkPlayer.playerID != PhotonNetwork.LocalPlayer.ActorNumber)
             {
-                ScoreEvents.current.playerHit(ownersID, scoreCount);
-                Debug.Log("Hit");
-            }
+                Debug.Log("Player hit!");
+                //This will prevent a snowball that no one threw to do damage
+                if (ownersID != 0)
+                {
+                    ScoreEvents.current.playerHit(ownersID, scoreCount);
+                    Debug.Log("Hit");
+                }
 
-            if (collision.gameObject.GetComponent<Health>())
-            {
-                //collision.gameObject.GetComponent<Health>().decreaseHealth(1);
-                collision.gameObject.GetComponent<Health>().hitAnimation();
-            }
-            //if(collision.gameObject.GetComponent<ChangeColor>())
-            if (collision.gameObject.GetComponent<ChangeColor>())
-                collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
-                
+                if (collision.gameObject.GetComponent<Health>())
+                {
+                    //collision.gameObject.GetComponent<Health>().decreaseHealth(1);
+                    collision.gameObject.GetComponent<Health>().hitAnimation();
+                }
+                //if(collision.gameObject.GetComponent<ChangeColor>())
+                if (collision.gameObject.GetComponent<ChangeColor>())
+                    collision.gameObject.GetComponent<ChangeColor>().ChangeObjectColor();
 
-            foreach (Transform c in transform)
-            {
-                c.gameObject.GetComponent<ParticleSystem>().Play();
-            }
 
-            snowballHit.Play();
+                foreach (Transform c in transform)
+                {
+                    c.gameObject.GetComponent<ParticleSystem>().Play();
+                }
+
+                snowballHit.Play();
+            }
         }
     }
 

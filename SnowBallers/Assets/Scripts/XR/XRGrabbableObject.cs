@@ -10,7 +10,7 @@ public class XRGrabbableObject : XRBaseInteractable
     [SerializeField]
     private GameObject[] grabbableObject;
 
-    int randomInt;
+    public int randomInt;
     GameObject currentSnowball;
 
     [SerializeField]
