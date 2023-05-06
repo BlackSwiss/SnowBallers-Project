@@ -75,6 +75,7 @@ public class PodiumManager : MonoBehaviour
             rig.transform.position = SpawnManager.instance.spawnPoints[3].position;
             rig.transform.rotation = SpawnManager.instance.spawnPoints[3].rotation;
         }
+        rig.transform.LookAt(objectsToEnable[1].transform);
     }
 
     private void disableMovement()

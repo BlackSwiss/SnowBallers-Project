@@ -21,8 +21,7 @@ public class ScoreManager : MonoBehaviourPun
     public bool gameOver = false;
 
     //Variables for outro cutscene
-    public GameObject playerInitialCamera;
-    public GameObject playerFinalCamera;
+    public GameObject playerPOVCamera;
     public GameObject outro;
     private Transform mainCamera;
 
@@ -43,6 +42,8 @@ public class ScoreManager : MonoBehaviourPun
         {
             calculateTopPlayers();
         }
+        playerPOVCamera.transform.position = mainCamera.position;
+        playerPOVCamera.transform.rotation = mainCamera.rotation;
     }
 
     //Keeps track of top 3 players for end game podium
@@ -144,8 +145,6 @@ public class ScoreManager : MonoBehaviourPun
     {
         PodiumManager podiumManager = FindObjectOfType<PodiumManager>();
         podiumManager.swapToPodium();
-        playerFinalCamera.transform.position = mainCamera.position;
-        playerFinalCamera.transform.rotation = mainCamera.rotation;
         outro.SetActive(true);
     }
 
@@ -156,8 +155,6 @@ public class ScoreManager : MonoBehaviourPun
         Debug.Log("Game over, transitioning to end game podium");
         gameOver = true;
         gameOverSound.Play();
-        playerInitialCamera.transform.position = mainCamera.position;
-        playerInitialCamera.transform.rotation = mainCamera.rotation;
         //Delays transition by 5 seconds to allow gameOverSound to finish playing
         Invoke(nameof(endGameInvoke), 5);
     }
