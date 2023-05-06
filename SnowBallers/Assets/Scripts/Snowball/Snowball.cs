@@ -22,7 +22,14 @@ public class Snowball : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Headshot" && ownersID != collision.gameObject.GetComponent<PhotonView>().OwnerActorNr)
+        Debug.Log("Player ID: " + collision.gameObject.GetComponent<Health>().networkPlayer.playerID
+            + "Actor number: " + PhotonNetwork.LocalPlayer.ActorNumber);
+
+        if(collision.gameObject.GetComponent<Health>().networkPlayer.playerID == PhotonNetwork.LocalPlayer.ActorNumber)
+        {
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.collider);
+        }
+        if(collision.gameObject.tag == "Headshot" && collision.gameObject.GetComponent<Health>().networkPlayer.playerID != PhotonNetwork.LocalPlayer.ActorNumber)
         {
             Debug.Log("Player headshot!");
             //This will prevent a snowball that no one threw to do damage
@@ -50,7 +57,7 @@ public class Snowball : MonoBehaviour
             bonk.Play();
             dizzy.Play();
         }
-        else if(collision.gameObject.tag == "Player" && ownersID != collision.gameObject.GetComponent<PhotonView>().OwnerActorNr)
+        else if(collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<Health>().networkPlayer.playerID != PhotonNetwork.LocalPlayer.ActorNumber)
         {
             Debug.Log("Player hit!");
             //This will prevent a snowball that no one threw to do damage
