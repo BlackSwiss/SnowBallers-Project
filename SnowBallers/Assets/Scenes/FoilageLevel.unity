@@ -4973,7 +4973,8 @@ MonoBehaviour:
   topScores: ffffffffffffffffffffffff
   topScoresID: ffffffffffffffffffffffff
   gameOver: 0
-  playerPOVCamera: {fileID: 754345220}
+  playerInitialCamera: {fileID: 0}
+  playerFinalCamera: {fileID: 0}
   outro: {fileID: 933291245}
 --- !u!4 &996118411
 Transform:
@@ -10503,8 +10504,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1397256910}
     m_Modifications:
+    - target: {fileID: 2278107274374010085, guid: 3ee66bbe088eae44fa11374748fd4f0d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2278107274595700664, guid: 3ee66bbe088eae44fa11374748fd4f0d, type: 3}
       propertyPath: layerMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278107274994975088, guid: 3ee66bbe088eae44fa11374748fd4f0d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278107275240386219, guid: 3ee66bbe088eae44fa11374748fd4f0d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278107275814150884, guid: 3ee66bbe088eae44fa11374748fd4f0d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278107275903825581, guid: 3ee66bbe088eae44fa11374748fd4f0d, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2278107276017031086, guid: 3ee66bbe088eae44fa11374748fd4f0d, type: 3}
