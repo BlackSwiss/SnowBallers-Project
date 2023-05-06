@@ -126,7 +126,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
         GameObject networkPlayer = GameObject.Find("Network Manager");
-        scoreManager.endGame();
+        scoreManager.GetComponent<PhotonView>().RPC("endGame", RpcTarget.AllBuffered);
         networkPlayer.GetComponent<PhotonView>().RPC("KickPlayersFromRoom", RpcTarget.AllBuffered);
     }
 

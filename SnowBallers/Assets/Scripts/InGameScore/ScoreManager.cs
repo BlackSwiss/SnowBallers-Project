@@ -150,6 +150,7 @@ public class ScoreManager : MonoBehaviourPun
     }
 
     //Transitions to end game state
+    [PunRPC]
     public void endGame()
     {
         Debug.Log("Game over, transitioning to end game podium");
