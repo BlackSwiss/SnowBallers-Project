@@ -4,40 +4,46 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class PS4Controller : MonoBehaviour
+public class ControllerMapper : MonoBehaviour
 {
     public Gamepad gamepad;
     public GameObject player;
-    public GameObject leftController;
-    public GameObject rightController;
     public LayerMask terrainLayer;
     public LayerToggleManager hudManager;
     public LayerToggleManager menuManager;
-    private float minY;
+    private float initialY;
+    private float minimumY;
+    private bool setInitialY = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < Gamepad.all.Count; i++)
+        InputSystem.onDeviceChange +=
+        (device, change) =>
         {
-            if(Gamepad.all[i].name == "DualShock4GamepadHID")
+            switch (change)
             {
-                Debug.Log("PS4 Controller detected");
-                gamepad = Gamepad.all[i];
-                return;
+                case InputDeviceChange.Disconnected:
+                    gamepad = null;
+                    Debug.Log("Controller disconnected");
+                    break;
+                default:
+                    break;
             }
-        }
-        Debug.Log("No PS4 Controller is plugged in");
-
-        minY = player.transform.position.y;
+        };
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gamepad != null && player != null)
+        if(gamepad == null)
         {
-            //Movement
+            TryInitializeGamepad();
+            return;
+        }
+        else if(player != null)
+        {
+            //Movement - left stick
             if(gamepad.leftStick.left.IsPressed())
             {
                 player.transform.Translate(Vector3.left * Time.deltaTime * 5f, Space.Self);
@@ -60,12 +66,17 @@ public class PS4Controller : MonoBehaviour
             Ray ray = new Ray(player.transform.position, Vector3.down);
             if (Physics.Raycast(ray, out RaycastHit hit, 10, terrainLayer.value))
             {
-                minY = hit.point.y + 1.25f;
+                if(!setInitialY)
+                {
+                    initialY = hit.distance;
+                    setInitialY = true;
+                }
+                minimumY = hit.point.y + initialY;
             }
-            player.transform.position = new Vector3(player.transform.position.x, minY, player.transform.position.z);
+            player.transform.position = new Vector3(player.transform.position.x, minimumY, player.transform.position.z);
 
 
-            //Rotation
+            //Rotation - right stick
             if(gamepad.rightStick.left.IsPressed())
             {
                 player.transform.Rotate(Vector3.down * Time.deltaTime * 150f, Space.World);
@@ -89,18 +100,11 @@ public class PS4Controller : MonoBehaviour
 
 
             //Interaction
-            if(gamepad.rightTrigger.IsPressed())
-            {
-                //InputDevice left = leftController.GetComponent<XRController>();
-                //left.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue);
-            }
-            else if(gamepad.leftTrigger.IsPressed())
-            {
-                //InputDevice right = rightController.GetComponent<XRController>();
-                //left.TryGetFeatureValue(CommonUsages.grip, out float gripValue);
-            }
+            //Used XR Device Simulator Input Actions to map trigger buttons
+            //Left trigger - must be held down to use right trigger
+            //Right trigger - used to click UI buttons
 
-            //Hud
+            //Hud - select button
             if(gamepad.selectButton.IsPressed())
             {
                 if(hudManager != null)
@@ -108,7 +112,9 @@ public class PS4Controller : MonoBehaviour
                     hudManager.toggleLayer();
                 }
             }
-            //Menu
+
+
+            //Menu - start button
             else if(gamepad.startButton.IsPressed())
             {
                 if(menuManager != null)
@@ -116,12 +122,15 @@ public class PS4Controller : MonoBehaviour
                     menuManager.toggleLayer();
                 }
             }
+        }
+    }
 
-
-            else
-            {
-                return;
-            }
+    private void TryInitializeGamepad()
+    {
+        gamepad = Gamepad.current;
+        if(gamepad != null)
+        {
+            Debug.Log("Controller connected");
         }
     }
 }

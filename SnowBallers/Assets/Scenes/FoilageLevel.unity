@@ -1273,6 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
+  networkPlayer: {fileID: 0}
   animate: {fileID: 296255784}
 --- !u!114 &296255783
 MonoBehaviour:
@@ -2166,9 +2167,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3144133828561523603, guid: 2671c371981ef824787370a97c1479cf, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1041518729}
+    - target: {fileID: 3144133828561523603, guid: 2671c371981ef824787370a97c1479cf, type: 3}
+      propertyPath: hudManager
+      value: 
+      objectReference: {fileID: 1323350398}
+    - target: {fileID: 3144133828561523603, guid: 2671c371981ef824787370a97c1479cf, type: 3}
+      propertyPath: menuManager
+      value: 
+      objectReference: {fileID: 2278107274489342678}
     - target: {fileID: 3458605213611837959, guid: 2671c371981ef824787370a97c1479cf, type: 3}
       propertyPath: m_Name
-      value: PS4Controller
+      value: Controller Mapper
       objectReference: {fileID: 0}
     - target: {fileID: 3458605213611837959, guid: 2671c371981ef824787370a97c1479cf, type: 3}
       propertyPath: m_IsActive
@@ -2181,7 +2194,7 @@ PrefabInstance:
     - target: {fileID: 3458605213611838008, guid: 2671c371981ef824787370a97c1479cf, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 529361724}
+      objectReference: {fileID: 1041518729}
     - target: {fileID: 3458605213611838008, guid: 2671c371981ef824787370a97c1479cf, type: 3}
       propertyPath: hudManager
       value: 
@@ -3883,6 +3896,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  randomInt: 0
   transformToInstantiate: {fileID: 672020229}
 --- !u!154 &672020232 stripped
 TerrainCollider:
@@ -7207,7 +7221,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4095
+    m_Bits: 2047
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

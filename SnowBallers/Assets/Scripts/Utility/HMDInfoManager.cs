@@ -34,23 +34,14 @@ public class HMDInfoManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Debug.Log("Turned on Keyboard Controls!");
-            turnonKeyboardControls();
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log("Turned on Gamepad Controls!");
-            turnonGamepadControls();
+            Debug.Log("Turned on Alternate Controls!");
+            turnOnAlternateControls();
         }
     }
 
-    void turnonKeyboardControls()
+    void turnOnAlternateControls()
     {
         HMDSimulator.SetActive(true);
-    }
-
-    void turnonGamepadControls()
-    {
         Controller.SetActive(true);
     }
 }
