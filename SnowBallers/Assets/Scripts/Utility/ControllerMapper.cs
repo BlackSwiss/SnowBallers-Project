@@ -8,6 +8,8 @@ public class ControllerMapper : MonoBehaviour
 {
     public Gamepad gamepad;
     public GameObject player;
+    public float moveSpeed = 3.75f;
+    public float turnSpeed = 100f;
     public LayerMask terrainLayer;
     public LayerToggleManager hudManager;
     public LayerToggleManager menuManager;
@@ -24,8 +26,8 @@ public class ControllerMapper : MonoBehaviour
             switch (change)
             {
                 case InputDeviceChange.Disconnected:
-                    gamepad = null;
                     Debug.Log("Controller disconnected");
+                    gamepad = null;
                     break;
                 default:
                     break;
@@ -46,19 +48,19 @@ public class ControllerMapper : MonoBehaviour
             //Movement - left stick
             if(gamepad.leftStick.left.IsPressed())
             {
-                player.transform.Translate(Vector3.left * Time.deltaTime * 5f, Space.Self);
+                player.transform.Translate(Vector3.left * Time.deltaTime * moveSpeed, Space.Self);
             }
             else if(gamepad.leftStick.right.IsPressed())
             {
-                player.transform.Translate(Vector3.right * Time.deltaTime * 5f, Space.Self);
+                player.transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.Self);
             }
             else if(gamepad.leftStick.up.IsPressed())
             {
-                player.transform.Translate(Vector3.forward * Time.deltaTime * 5f, Space.Self);
+                player.transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.Self);
             }
             else if(gamepad.leftStick.down.IsPressed())
             {
-                player.transform.Translate(Vector3.back * Time.deltaTime * 5f, Space.Self);
+                player.transform.Translate(Vector3.back * Time.deltaTime * moveSpeed, Space.Self);
             }
 
 
@@ -79,19 +81,19 @@ public class ControllerMapper : MonoBehaviour
             //Rotation - right stick
             if(gamepad.rightStick.left.IsPressed())
             {
-                player.transform.Rotate(Vector3.down * Time.deltaTime * 150f, Space.World);
+                player.transform.Rotate(Vector3.down * Time.deltaTime * turnSpeed, Space.World);
             }
             else if(gamepad.rightStick.right.IsPressed())
             {
-                player.transform.Rotate(Vector3.up * Time.deltaTime * 150f, Space.World);
+                player.transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed, Space.World);
             }
             else if(gamepad.rightStick.up.IsPressed())
             {
-                player.transform.Rotate(Vector3.left * Time.deltaTime * 150f, Space.Self);
+                player.transform.Rotate(Vector3.left * Time.deltaTime * turnSpeed, Space.Self);
             }
             else if(gamepad.rightStick.down.IsPressed())
             {
-                player.transform.Rotate(Vector3.right * Time.deltaTime * 150f, Space.Self);
+                player.transform.Rotate(Vector3.right * Time.deltaTime * turnSpeed, Space.Self);
             }
             else if(gamepad.rightStickButton.IsPressed())
             {
@@ -103,6 +105,7 @@ public class ControllerMapper : MonoBehaviour
             //Used XR Device Simulator Input Actions to map trigger buttons
             //Left trigger - must be held down to use right trigger
             //Right trigger - used to click UI buttons
+
 
             //Hud - select button
             if(gamepad.selectButton.IsPressed())

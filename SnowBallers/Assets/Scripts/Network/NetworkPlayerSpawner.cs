@@ -31,10 +31,17 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     int timeBeforeKicked = 15;
     const int NumPlayersToStartMatch = 1;
 
+    // Vars for custom lobby
+    public BoolSO isCustomLobby;
+    public CustomLobbyManager customLobbyManager;
+    int changeTimeStep = 5;
+    int minimumTime = 30;
+    int maximumTime = 180;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -91,8 +98,17 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         // Have second player start timer setting for all players
         if (PhotonNetwork.CurrentRoom.PlayerCount >= NumPlayersToStartMatch)
         {
-            GameObject networkPlayer = GameObject.Find("Network Manager");
-            networkPlayer.GetComponent<PhotonView>().RPC("SetTimer", RpcTarget.AllBuffered);
+            if(isCustomLobby.Value)
+            {
+                if(PhotonNetwork.IsMasterClient)
+                {
+                    Invoke(nameof(customLobbyInvoke),9);
+                }
+            }
+            else
+            {
+                SetTimerRPC();
+            }
         }
     }
 
@@ -146,5 +162,35 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public double getTimerDecrement()
     {
         return timerDecrement;
+    }
+
+    public void SetTimerRPC()
+    {
+        GameObject networkPlayer = GameObject.Find("Network Manager");
+        networkPlayer.GetComponent<PhotonView>().RPC("SetTimer", RpcTarget.AllBuffered);
+    }
+
+    public void incrementRoundTime()
+    {
+        roundTime += changeTimeStep;
+        if(roundTime > maximumTime)
+            roundTime = maximumTime;
+    }
+
+    public void decrementRoundTime()
+    {
+        roundTime -= changeTimeStep;
+        if(roundTime < minimumTime)
+            roundTime = minimumTime;
+    }
+
+    public double getStartTime()
+    {
+        return roundTime;
+    }
+
+    public void customLobbyInvoke()
+    {
+        customLobbyManager.enableCustomLobbyUI();
     }
 }

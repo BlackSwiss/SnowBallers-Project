@@ -2953,6 +2953,10 @@ PrefabInstance:
       propertyPath: HMDSimulator
       value: 
       objectReference: {fileID: 1901658932}
+    - target: {fileID: 6504800868941687431, guid: 048288e607be9a347a87f99f7ca8b4b3, type: 3}
+      propertyPath: isAlternateControls
+      value: 
+      objectReference: {fileID: 11400000, guid: fe7aab7da1e2e6b47b62b0d18c815796, type: 2}
     - target: {fileID: 6504800868941687432, guid: 048288e607be9a347a87f99f7ca8b4b3, type: 3}
       propertyPath: m_Name
       value: HMD Info Manager
@@ -3927,6 +3931,8 @@ MonoBehaviour:
   scoreManager: {fileID: 996118409}
   players: []
   spawnPointIndex: 0
+  isCustomLobby: {fileID: 0}
+  customLobbyManager: {fileID: 0}
 --- !u!114 &1420735364
 MonoBehaviour:
   m_ObjectHideFlags: 0

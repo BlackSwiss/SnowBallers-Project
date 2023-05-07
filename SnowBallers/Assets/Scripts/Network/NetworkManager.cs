@@ -16,10 +16,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public GameObject roomUI;
     public List<DefaultRoom> defaultRooms;
+    public BoolSO isCustomLobby;
+
     // Start is called before the first frame update
     void Start()
     {
         //ConnectToServer();
+        isCustomLobby.Value = false;
     }
 
     // Update is called once per frame
@@ -30,14 +33,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void ConnectToServer()
     {
+        Debug.Log("Trying to connect to server...");
         PhotonNetwork.ConnectUsingSettings();
-        Debug.Log("Try connect to server... ");
     }
 
     public override void OnConnectedToMaster()
     {
         //Tell console we are connected
-        Debug.Log("Conneceted to server.");
+        Debug.Log("Connected to server.");
         base.OnConnectedToMaster();
 
         PhotonNetwork.JoinLobby();
@@ -45,8 +48,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        base.OnJoinedLobby();
         Debug.Log("We joined the lobby!");
+        base.OnJoinedLobby();
         roomUI.SetActive(true);
     }
     public void initializeRoom(int defaultRoomIndex)
@@ -67,25 +70,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Joined a room");
+        Debug.Log("Joined a room.");
         base.OnJoinedRoom();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("A new player joined the room");
+        Debug.Log("A new player joined the room.");
         base.OnPlayerEnteredRoom(newPlayer);
     }
 
     public override void OnLeftRoom()
     {
-        Debug.Log("Left the room");
+        Debug.Log("Left the room.");
         base.OnLeftRoom();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer) 
     {
-        Debug.Log("A player has left the room");
+        Debug.Log("A player has left the room.");
         base.OnPlayerLeftRoom(otherPlayer);
     }
 }

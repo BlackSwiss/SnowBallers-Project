@@ -9,8 +9,8 @@ public class LayerToggleManager : MonoBehaviour
     public InputDeviceCharacteristics controllerCharacteristics;
     public LayerMask viewableLayers;
     public LayerMask ignoreLayers;
+    public GameObject[] stuffToToggle;
     private InputDevice targetDevice;
-    private bool currentCanvasStatus = false;
     private bool buttonRecentlyPressed = false;
     private float resetButtonDelay = 0.25f;
 
@@ -59,13 +59,24 @@ public class LayerToggleManager : MonoBehaviour
         if(buttonRecentlyPressed)
             return;
 
-        currentCanvasStatus = !currentCanvasStatus;
         buttonRecentlyPressed = true;
         Invoke(nameof(resetButton), resetButtonDelay);
 
-        if(currentCanvasStatus)
+        if(camera.cullingMask != viewableLayers)
+        {
             camera.cullingMask = viewableLayers;
+            foreach(GameObject gameObject in stuffToToggle)
+            {
+                gameObject.SetActive(true);
+            }
+        }
         else
+        {
             camera.cullingMask = ignoreLayers;
+            foreach(GameObject gameObject in stuffToToggle)
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 }

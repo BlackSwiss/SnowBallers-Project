@@ -10,6 +10,8 @@ public class HMDInfoManager : MonoBehaviour
     //TURN THIS OBJECT ON IF YOU WANT KEYBOARD CONTORLS IN THIS SCENE
     public GameObject HMDSimulator;
     public GameObject Controller;
+    public BoolSO isAlternateControls;
+
     void Start()
     {
         Debug.Log("Is device active: " + XRSettings.isDeviceActive);
@@ -27,6 +29,12 @@ public class HMDInfoManager : MonoBehaviour
         {
             Debug.Log("We have a headset " + XRSettings.loadedDeviceName);
         }
+
+        if(isAlternateControls.Value)
+        {
+            Debug.Log("Alternate controls are still active!" + XRSettings.loadedDeviceName);
+            turnOnAlternateControls();
+        }
     }
 
     // Update is called once per frame
@@ -43,5 +51,11 @@ public class HMDInfoManager : MonoBehaviour
     {
         HMDSimulator.SetActive(true);
         Controller.SetActive(true);
+        isAlternateControls.Value = true;
+    }
+
+    void OnApplicationQuit()
+    {
+        isAlternateControls.Value = false;
     }
 }
