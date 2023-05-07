@@ -6482,6 +6482,10 @@ PrefabInstance:
       propertyPath: viewableLayers.m_Bits
       value: 16384
       objectReference: {fileID: 0}
+    - target: {fileID: 2455540853010488476, guid: 92e22792574f90b4c9617debe9444260, type: 3}
+      propertyPath: stuffToToggle.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2867549276038488329, guid: 92e22792574f90b4c9617debe9444260, type: 3}
       propertyPath: m_Name
       value: HUD Camera
