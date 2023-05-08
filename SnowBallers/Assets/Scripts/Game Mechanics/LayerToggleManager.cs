@@ -10,6 +10,7 @@ public class LayerToggleManager : MonoBehaviour
     public LayerMask viewableLayers;
     public LayerMask ignoreLayers;
     public GameObject[] stuffToToggle;
+    public GameObject customLobbyUI;
     private InputDevice targetDevice;
     private bool buttonRecentlyPressed = false;
     private float resetButtonDelay = 0.25f;
@@ -57,6 +58,9 @@ public class LayerToggleManager : MonoBehaviour
     public void toggleLayer()
     {
         if(buttonRecentlyPressed)
+            return;
+
+        if(customLobbyUI.activeInHierarchy)
             return;
 
         buttonRecentlyPressed = true;
