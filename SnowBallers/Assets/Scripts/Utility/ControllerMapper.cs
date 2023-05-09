@@ -16,6 +16,7 @@ public class ControllerMapper : MonoBehaviour
     private float initialY;
     private float minimumY;
     private bool setInitialY = false;
+    private ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,8 @@ public class ControllerMapper : MonoBehaviour
                     break;
             }
         };
+
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -45,22 +48,26 @@ public class ControllerMapper : MonoBehaviour
         }
         else if(player != null)
         {
-            //Movement - left stick
-            if(gamepad.leftStick.left.IsPressed())
+            //If game over, stop player from moving.
+            if(scoreManager == null || !scoreManager.gameOver)
             {
-                player.transform.Translate(Vector3.left * Time.deltaTime * moveSpeed, Space.Self);
-            }
-            else if(gamepad.leftStick.right.IsPressed())
-            {
-                player.transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.Self);
-            }
-            else if(gamepad.leftStick.up.IsPressed())
-            {
-                player.transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.Self);
-            }
-            else if(gamepad.leftStick.down.IsPressed())
-            {
-                player.transform.Translate(Vector3.back * Time.deltaTime * moveSpeed, Space.Self);
+                //Movement - left stick
+                if(gamepad.leftStick.left.IsPressed())
+                {
+                    player.transform.Translate(Vector3.left * Time.deltaTime * moveSpeed, Space.Self);
+                }
+                else if(gamepad.leftStick.right.IsPressed())
+                {
+                    player.transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.Self);
+                }
+                else if(gamepad.leftStick.up.IsPressed())
+                {
+                    player.transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.Self);
+                }
+                else if(gamepad.leftStick.down.IsPressed())
+                {
+                    player.transform.Translate(Vector3.back * Time.deltaTime * moveSpeed, Space.Self);
+                }
             }
 
 

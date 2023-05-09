@@ -42,6 +42,7 @@ public class PodiumManager : MonoBehaviour
         XROrigin rig = FindObjectOfType<XROrigin>();
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
         NetworkPlayer networkPlayer = FindObjectOfType<NetworkPlayer>();
+        CinemaManager cinemaManager = FindObjectOfType<CinemaManager>();
 
         //Stops function if no network player is found
         if(networkPlayer == null)
@@ -75,7 +76,11 @@ public class PodiumManager : MonoBehaviour
             rig.transform.position = SpawnManager.instance.spawnPoints[3].position;
             rig.transform.rotation = SpawnManager.instance.spawnPoints[3].rotation;
         }
+
+        //Rotate player to face podium mirror
         rig.transform.LookAt(objectsToEnable[1].transform);
+        //Sync POV camera for outro cutscene
+        cinemaManager.syncPOVCamera(rig.transform.Find("Camera Offset/Main Camera"));
     }
 
     private void disableMovement()

@@ -20,17 +20,14 @@ public class ScoreManager : MonoBehaviourPun
     public int[] topScoresID = {-1,-1,-1};
     public bool gameOver = false;
 
-    //Variables for outro cutscene
-    public GameObject playerPOVCamera;
+    //Variables for intro/outro cutscene
     public GameObject outro;
-    private Transform mainCamera;
 
     // Start is called before the first frame update
     void Start()
     {
         ScoreEvents.current.onPlayerHit += incrementScore;
         ScoreEvents.current.onHeadshot += incrementScoreHeadshot;
-        mainCamera = FindObjectOfType<XROrigin>().transform.Find("Camera Offset/Main Camera");
         //Invoke(nameof(endGame), 1);
     }
 
@@ -42,8 +39,6 @@ public class ScoreManager : MonoBehaviourPun
         {
             calculateTopPlayers();
         }
-        playerPOVCamera.transform.position = mainCamera.position;
-        playerPOVCamera.transform.rotation = mainCamera.rotation;
     }
 
     //Keeps track of top 3 players for end game podium
