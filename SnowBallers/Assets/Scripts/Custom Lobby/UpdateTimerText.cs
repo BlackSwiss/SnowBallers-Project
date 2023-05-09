@@ -23,7 +23,7 @@ public class UpdateTimerText : MonoBehaviour
 
     public void updateTimerText()
     {
-        time = networkPlayerSpawner.getStartTime();
+        time = networkPlayerSpawner.getRoundTime();
         gameObject.GetComponent<TextMeshProUGUI>().text = time.ToString();
     }
 }

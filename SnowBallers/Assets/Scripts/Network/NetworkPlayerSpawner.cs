@@ -80,6 +80,10 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
         rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
 
+        //Sync POV camera for intro cutscene
+        CinemaManager cinemaManager = FindObjectOfType<CinemaManager>();
+        cinemaManager.syncPOVCamera(headRig);
+
         //Give them an id so we can keep track of score
         spawnedPlayerPrefab.GetComponent<NetworkPlayer>().playerID = PhotonNetwork.LocalPlayer.ActorNumber;
 
@@ -102,7 +106,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
             {
                 if(PhotonNetwork.IsMasterClient)
                 {
-                    Invoke(nameof(customLobbyInvoke),9);
+                    customLobbyManager.enableCustomLobbyUI();
                 }
             }
             else
@@ -141,8 +145,10 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public void OnTimeIsUp()
     {
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        CinemaManager cinemaManager = FindObjectOfType<CinemaManager>();
         GameObject networkPlayer = GameObject.Find("Network Manager");
         scoreManager.GetComponent<PhotonView>().RPC("endGame", RpcTarget.AllBuffered);
+        cinemaManager.GetComponent<PhotonView>().RPC("playOutroCutscene", RpcTarget.AllBuffered);
         networkPlayer.GetComponent<PhotonView>().RPC("KickPlayersFromRoom", RpcTarget.AllBuffered);
     }
 
@@ -167,7 +173,9 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public void SetTimerRPC()
     {
         GameObject networkPlayer = GameObject.Find("Network Manager");
+        CinemaManager cinemaManager = FindObjectOfType<CinemaManager>();
         networkPlayer.GetComponent<PhotonView>().RPC("SetTimer", RpcTarget.AllBuffered);
+        cinemaManager.GetComponent<PhotonView>().RPC("playIntroCutscene", RpcTarget.AllBuffered);
     }
 
     public void incrementRoundTime()
@@ -184,13 +192,8 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
             roundTime = minimumTime;
     }
 
-    public double getStartTime()
+    public double getRoundTime()
     {
         return roundTime;
-    }
-
-    public void customLobbyInvoke()
-    {
-        customLobbyManager.enableCustomLobbyUI();
     }
 }
