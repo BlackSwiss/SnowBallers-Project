@@ -50,7 +50,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("We joined the lobby!");
         base.OnJoinedLobby();
-        //roomUI.SetActive(true);
+        roomUI.SetActive(true);
     }
     public void initializeRoom(int defaultRoomIndex)
     {
