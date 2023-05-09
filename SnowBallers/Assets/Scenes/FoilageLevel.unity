@@ -2199,6 +2199,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1846947782}
     - target: {fileID: 1448764393329168506, guid: 2a2af954647144d43888855e258c4bc8, type: 3}
+      propertyPath: fightMusic
+      value: 
+      objectReference: {fileID: 1905167777}
+    - target: {fileID: 1448764393329168506, guid: 2a2af954647144d43888855e258c4bc8, type: 3}
       propertyPath: podiumSound
       value: 
       objectReference: {fileID: 1846947782}
@@ -9225,6 +9229,11 @@ PrefabInstance:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6243386307892462877, guid: e2b55414cea124849bbac9177f352ba5, type: 3}
   m_PrefabInstance: {fileID: 1901658931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1905167777 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6053744608046544022, guid: 85c255d78ab6f724e8fb4d25be109242, type: 3}
+  m_PrefabInstance: {fileID: 1846947781}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1921515075
 GameObject:

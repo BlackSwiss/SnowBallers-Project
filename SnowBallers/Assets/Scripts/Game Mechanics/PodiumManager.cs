@@ -10,6 +10,7 @@ public class PodiumManager : MonoBehaviour
     public GameObject[] objectsToDisable;
     public GameObject[] objectsToEnable;
     public Transform[] spawnPointsToAdd;
+    public AudioSource fightMusic;
     public AudioSource podiumSound;
 
     //Disables unnecessary game objects for end game state
@@ -98,6 +99,7 @@ public class PodiumManager : MonoBehaviour
         addSpawnPointsToManager();
         movePlayerToPodium();
         disableMovement();
+        fightMusic.Stop();
         podiumSound.Play();
     }
 }
