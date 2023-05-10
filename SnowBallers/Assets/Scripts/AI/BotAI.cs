@@ -109,12 +109,12 @@ public class BotAI : MonoBehaviour
         {
             if (ammoCount == 0)
             {
-                Debug.Log("Bot Hiding");
+                //Debug.Log("Bot Hiding");
                 Hide();
             }
             else if(playerInAttackRange)
             {
-                Debug.Log("Bot Attacking");
+                //Debug.Log("Bot Attacking");
                 modelRigBuilder.enabled = false;
                 modelAnimator.SetBool("Throw", true);
                 Invoke(nameof(AttackPlayer), attackAnimationDelay);
@@ -123,14 +123,14 @@ public class BotAI : MonoBehaviour
             }
             else if(playerInSightRange)
             {
-                Debug.Log("Bot Chasing");
+                //Debug.Log("Bot Chasing");
                 modelAnimator.SetBool("Move", true);
                 ChasePlayer();
                 isChaseOrAttack = true;
             }
             else
             {
-                Debug.Log("Bot Dodging");
+                //Debug.Log("Bot Dodging");
                 modelAnimator.SetBool("Move", false);
                 Dodging();
                 isChaseOrAttack = false;
