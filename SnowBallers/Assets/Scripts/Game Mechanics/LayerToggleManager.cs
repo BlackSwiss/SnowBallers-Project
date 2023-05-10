@@ -9,8 +9,7 @@ public class LayerToggleManager : MonoBehaviour
     public InputDeviceCharacteristics controllerCharacteristics;
     public LayerMask viewableLayers;
     public LayerMask ignoreLayers;
-    public GameObject[] stuffToEnable;
-    public GameObject[] stuffToDisable;
+    public GameObject[] stuffToToggle;
     public GameObject customLobbyUI;
     private InputDevice targetDevice;
     private bool buttonRecentlyPressed = false;
@@ -70,11 +69,7 @@ public class LayerToggleManager : MonoBehaviour
         if(camera.cullingMask != viewableLayers)
         {
             camera.cullingMask = viewableLayers;
-            foreach(GameObject gameObject in stuffToDisable)
-            {
-                gameObject.SetActive(false);
-            }
-            foreach(GameObject gameObject in stuffToEnable)
+            foreach(GameObject gameObject in stuffToToggle)
             {
                 gameObject.SetActive(true);
             }
@@ -82,13 +77,9 @@ public class LayerToggleManager : MonoBehaviour
         else
         {
             camera.cullingMask = ignoreLayers;
-            foreach(GameObject gameObject in stuffToEnable)
+            foreach(GameObject gameObject in stuffToToggle)
             {
                 gameObject.SetActive(false);
-            }
-            foreach(GameObject gameObject in stuffToDisable)
-            {
-                gameObject.SetActive(true);
             }
         }
     }

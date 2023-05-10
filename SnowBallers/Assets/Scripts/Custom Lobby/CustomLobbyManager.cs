@@ -8,8 +8,7 @@ public class CustomLobbyManager : MonoBehaviour
     public LayerMask viewableLayers;
     public LayerMask ignoreLayers;
     public GameObject customLobbyUI;
-    public GameObject rightHandDirect;
-    public GameObject rightHandRay;
+    public GameObject controller;
 
     public void enableCustomLobbyUI()
     {
@@ -28,14 +27,12 @@ public class CustomLobbyManager : MonoBehaviour
         if(camera.cullingMask != viewableLayers)
         {
             camera.cullingMask = viewableLayers;
-            rightHandDirect.SetActive(false);
-            rightHandRay.SetActive(true);
+            controller.layer = 15;
         }
         else
         {
             camera.cullingMask = ignoreLayers;
-            rightHandRay.SetActive(false);
-            rightHandDirect.SetActive(true);
+            controller.layer = 14;
         }
     }
 }
