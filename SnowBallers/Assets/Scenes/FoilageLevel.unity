@@ -4969,7 +4969,13 @@ MonoBehaviour:
   topScores: ffffffffffffffffffffffff
   topScoresID: ffffffffffffffffffffffff
   gameOver: 0
+<<<<<<< HEAD
   outro: {fileID: 105374965}
+=======
+  playerInitialCamera: {fileID: 0}
+  playerFinalCamera: {fileID: 0}
+  outro: {fileID: 933291245}
+>>>>>>> parent of c6f1ede (Merge branch 'main' of https://github.com/BlackSwiss/SnowBallers-Project)
 --- !u!4 &996118411
 Transform:
   m_ObjectHideFlags: 0
