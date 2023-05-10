@@ -60,7 +60,7 @@ public class LayerToggleManager : MonoBehaviour
         if(buttonRecentlyPressed)
             return;
 
-        if(customLobbyUI != null && customLobbyUI.activeInHierarchy)
+        if(customLobbyUI.activeInHierarchy)
             return;
 
         buttonRecentlyPressed = true;
