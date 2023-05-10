@@ -8,6 +8,8 @@ using Photon.Realtime;
 public class XRGrabbableObject : XRBaseInteractable
 {
     [SerializeField]
+    Collider ownerCollider;
+    [SerializeField]
     private GameObject[] grabbableObject;
 
     public int randomInt;
@@ -23,6 +25,11 @@ public class XRGrabbableObject : XRBaseInteractable
         // Instantiate object
         GameObject newObject = PhotonNetwork.Instantiate(currentSnowball.name, transformToInstantiate.position, Quaternion.identity);
 
+        //Grab snowball owner collider so we dont hit self, and pass to snowball
+        Snowball snowballScript = newObject.GetComponent<Snowball>();
+
+        snowballScript.owner = ownerCollider;
+        Physics.IgnoreCollision(ownerCollider, newObject.GetComponent<Collider>());
         // Get grab interactable from prefab
         XRGrabInteractable objectInteractable = newObject.GetComponent<XRGrabInteractable>();
 

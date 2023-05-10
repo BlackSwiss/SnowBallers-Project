@@ -13,22 +13,28 @@ public class Snowball : MonoBehaviour
     public Vector3 initialPos;
 
     public int ownersID = 0;
+    public Collider owner;
 
     public int scoreCount = 1;
 
     private void Start()
     {
-        initialPos = gameObject.transform.position;        
+        
+        initialPos = gameObject.transform.position;
+        StartCoroutine(waitForCollider());
     }
+    
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Hit: " + collision.gameObject.name);
         if (collision.gameObject.GetComponent<Health>().networkPlayer != null)
         {
             Debug.Log("Player ID: " + collision.gameObject.GetComponent<Health>().networkPlayer.playerID
                 + "Actor number: " + PhotonNetwork.LocalPlayer.ActorNumber);
 
-            if (collision.gameObject.GetComponent<Health>().networkPlayer.playerID == PhotonNetwork.LocalPlayer.ActorNumber)
+            if (GetComponent<PhotonView>().IsMine || GetComponent<PhotonView>().AmOwner || collision.gameObject.GetComponent<Health>().networkPlayer.playerID == PhotonNetwork.LocalPlayer.ActorNumber)
             {
+                Debug.Log("Hit owner");
                 Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), collision.collider);
             }
             if (collision.gameObject.tag == "Headshot" && collision.gameObject.GetComponent<Health>().networkPlayer.playerID != PhotonNetwork.LocalPlayer.ActorNumber)
@@ -97,9 +103,20 @@ public class Snowball : MonoBehaviour
         }
 
         //If snowball gets owned by another player, we will assign the owner id to that players
-        if(GetComponent<Photon.Pun.PhotonView>().OwnerActorNr != ownersID)
-            ownersID =  GetComponent<Photon.Pun.PhotonView>().OwnerActorNr;
+        if (GetComponent<Photon.Pun.PhotonView>().OwnerActorNr != ownersID)
+        {
+            ownersID = GetComponent<Photon.Pun.PhotonView>().OwnerActorNr;
+            
+        }
     }
+
+    IEnumerator waitForCollider()
+    {
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Collider>().enabled = true;
+    }
+   
 
 
 }

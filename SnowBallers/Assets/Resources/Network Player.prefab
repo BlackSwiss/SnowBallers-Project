@@ -601,6 +601,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
+      propertyPath: ownerCollider
+      value: 
+      objectReference: {fileID: 4034512331994179484}
+    - target: {fileID: 6141592221698828168, guid: 1af5640af293e3d4fa423a11ed67127a, type: 3}
       propertyPath: grabbableObject.Array.size
       value: 7
       objectReference: {fileID: 0}
