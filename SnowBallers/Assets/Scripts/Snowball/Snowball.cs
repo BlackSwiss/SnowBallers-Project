@@ -22,7 +22,7 @@ public class Snowball : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<Health>().networkPlayer)
+        if (collision.gameObject.GetComponent<Health>().networkPlayer != null)
         {
             Debug.Log("Player ID: " + collision.gameObject.GetComponent<Health>().networkPlayer.playerID
                 + "Actor number: " + PhotonNetwork.LocalPlayer.ActorNumber);

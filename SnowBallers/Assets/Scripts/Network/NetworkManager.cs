@@ -17,6 +17,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject roomUI;
     public List<DefaultRoom> defaultRooms;
     public BoolSO isCustomLobby;
+    public OnlineMenu onlineMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void ConnectToServer()
     {
         Debug.Log("Trying to connect to server...");
+        onlineMenu.loadingScreenToggle(true);
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -41,6 +43,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         //Tell console we are connected
         Debug.Log("Connected to server.");
+        onlineMenu.OnClickConnect();
+        onlineMenu.loadingScreenToggle(false);
         base.OnConnectedToMaster();
 
         PhotonNetwork.JoinLobby();
