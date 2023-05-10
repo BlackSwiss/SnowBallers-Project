@@ -30,12 +30,14 @@ public class CustomLobbyManager : MonoBehaviour
             camera.cullingMask = viewableLayers;
             rightHandDirect.SetActive(false);
             rightHandRay.SetActive(true);
+            rightHandRay.layer = 15;
         }
         else
         {
             camera.cullingMask = ignoreLayers;
             rightHandRay.SetActive(false);
             rightHandDirect.SetActive(true);
+            rightHandRay.layer = 14;
         }
     }
 }
