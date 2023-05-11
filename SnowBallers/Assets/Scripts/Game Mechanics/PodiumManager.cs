@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.XR;
 using Unity.XR.CoreUtils;
 using UnityEngine.XR.Interaction.Toolkit;
+using Photon.Pun;
 
 public class PodiumManager : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class PodiumManager : MonoBehaviour
         if(networkPlayer == null)
             return;
 
-        int playerID = networkPlayer.playerID;
+        int playerID = PhotonNetwork.LocalPlayer.ActorNumber;
 
         Debug.Log("Player ID: " + playerID);
         Debug.Log("1st Player ID: " + scoreManager.topScoresID[0]);
