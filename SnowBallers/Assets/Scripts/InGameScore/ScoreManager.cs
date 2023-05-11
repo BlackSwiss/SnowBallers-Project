@@ -18,7 +18,6 @@ public class ScoreManager : MonoBehaviourPun
     //Variables for end game podium
     public int[] topScores = {-1,-1,-1};
     public int[] topScoresID = {-1,-1,-1};
-    public bool gameOver = false;
 
     //Variables for intro/outro cutscene
     public GameObject outro;
@@ -34,11 +33,7 @@ public class ScoreManager : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        //Calculate top players for end game podium if there is at least one player
-        if(playerScores.Count > 0 && !gameOver)
-        {
-            calculateTopPlayers();
-        }
+
     }
 
     //Keeps track of top 3 players for end game podium
@@ -158,8 +153,8 @@ public class ScoreManager : MonoBehaviourPun
     public void endGame()
     {
         Debug.Log("Game over, transitioning to end game podium");
-        gameOver = true;
         gameOverSound.Play();
+        calculateTopPlayers();
         //Delays transition by 5 seconds to allow gameOverSound to finish playing
         Invoke(nameof(endGameInvoke), 5);
     }
