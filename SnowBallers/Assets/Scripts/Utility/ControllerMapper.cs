@@ -16,7 +16,7 @@ public class ControllerMapper : MonoBehaviour
     private float initialY;
     private float minimumY;
     private bool setInitialY = false;
-    private ScoreManager scoreManager;
+    private CinemaManager cinemaManager;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class ControllerMapper : MonoBehaviour
             }
         };
 
-        scoreManager = FindObjectOfType<ScoreManager>();
+        cinemaManager = FindObjectOfType<CinemaManager>();
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class ControllerMapper : MonoBehaviour
         else if(player != null)
         {
             //If game over, stop player from moving.
-            if(scoreManager == null || !scoreManager.gameOver)
+            if(cinemaManager == null || cinemaManager.isMovementActive)
             {
                 //Movement - left stick
                 if(gamepad.leftStick.left.IsPressed())

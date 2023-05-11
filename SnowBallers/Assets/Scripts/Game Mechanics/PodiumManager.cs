@@ -50,6 +50,12 @@ public class PodiumManager : MonoBehaviour
             return;
 
         int playerID = networkPlayer.playerID;
+
+        Debug.Log("Player ID: " + playerID);
+        Debug.Log("1st Player ID: " + scoreManager.topScoresID[0]);
+        Debug.Log("2nd Player ID: " + scoreManager.topScoresID[1]);
+        Debug.Log("3rd Player ID: " + scoreManager.topScoresID[2]);
+
         //If current player is 1st place
         if(playerID == scoreManager.topScoresID[0])
         {
@@ -84,13 +90,6 @@ public class PodiumManager : MonoBehaviour
         cinemaManager.syncPOVCamera(rig.transform.Find("Camera Offset/Main Camera"));
     }
 
-    private void disableMovement()
-    {
-        GameObject locomotion = GameObject.Find("Locomotion System");
-        ActionBasedContinuousMoveProvider moveProvider = locomotion.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-        moveProvider.enabled = false;
-    }
-
     //Transitions to end game podium state
     public void swapToPodium()
     {
@@ -98,7 +97,6 @@ public class PodiumManager : MonoBehaviour
         enableObjects();
         addSpawnPointsToManager();
         movePlayerToPodium();
-        disableMovement();
         fightMusic.Stop();
         podiumSound.Play();
     }

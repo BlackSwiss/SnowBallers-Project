@@ -49,6 +49,8 @@ public class ScoreManager : MonoBehaviourPun
             //Get current player score
             PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
 
+            bool alreadyInTopScore = false;
+
             //If current score is greater than 1st place score
             if(scoreScript.score > topScores[0])
             {
@@ -56,15 +58,23 @@ public class ScoreManager : MonoBehaviourPun
                 topScores[0] = scoreScript.score;
                 topScoresID[0] = scoreScript.playerID;
             }
+            else if(scoreScript.playerID == topScoresID[0])
+            {
+                alreadyInTopScore = true;
+            }
             //If current score is greater than 2nd place score
-            else if(scoreScript.score > topScores[1])
+            else if(scoreScript.score > topScores[1] && !alreadyInTopScore)
             {
                 //Replace 2nd place from topScores
                 topScores[1] = scoreScript.score;
                 topScoresID[1] = scoreScript.playerID;
             }
+            else if(scoreScript.playerID == topScoresID[1])
+            {
+                alreadyInTopScore = true;
+            }
             //If current score is greater than 3rd place score
-            else if(scoreScript.score > topScores[2])
+            else if(scoreScript.score > topScores[2] && !alreadyInTopScore)
             {
                 //Replace 3rd place from topScores
                 topScores[2] = scoreScript.score;

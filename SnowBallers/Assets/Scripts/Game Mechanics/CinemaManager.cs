@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class CinemaManager : MonoBehaviourPun
 {
@@ -10,6 +11,7 @@ public class CinemaManager : MonoBehaviourPun
     public GameObject povCamera;
     public GameObject intro;
     public GameObject outro;
+    public bool isMovementActive = true;
     private bool cinemaTracking = false;
 
     // Start is called before the first frame update
@@ -42,11 +44,13 @@ public class CinemaManager : MonoBehaviourPun
     [PunRPC]
     public void playIntroCutscene()
     {   
+        toggleMovement();
         cinemaTracking = true;
         cinemaCamera.SetActive(true);
         intro.SetActive(true);
         //Disable cutscene assets once intro is finished.
         Invoke(nameof(disableAllCinema),9);
+        Invoke(nameof(toggleMovement),9);
     }
 
     [PunRPC]
@@ -58,6 +62,7 @@ public class CinemaManager : MonoBehaviourPun
 
     private void playOutroCutsceneInvoke()
     {
+        toggleMovement();
         cinemaTracking = true;
         cinemaCamera.SetActive(true);
         outro.SetActive(true);
@@ -71,5 +76,13 @@ public class CinemaManager : MonoBehaviourPun
         cinemaCamera.SetActive(false);
         intro.SetActive(false);
         outro.SetActive(false);
+    }
+
+    private void toggleMovement()
+    {
+        isMovementActive = !isMovementActive;
+        GameObject locomotion = GameObject.Find("Locomotion System");
+        ActionBasedContinuousMoveProvider moveProvider = locomotion.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
+        moveProvider.enabled = !moveProvider.enabled;
     }
 }
