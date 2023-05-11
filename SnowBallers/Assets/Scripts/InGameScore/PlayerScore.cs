@@ -14,7 +14,14 @@ public class PlayerScore : MonoBehaviourPun
     void Start()
     {
         //scoreText.GetComponent<TextMeshProUGUI>().text = "Player " + playerID + " Score: " + score.ToString();
-        GameObject.Find("Score Manager").GetComponent<ScoreManager>().playerScores.Add(gameObject);
+        ScoreManager scoreManager = GameObject.Find("Score Manager").GetComponent<ScoreManager>();
+        foreach(GameObject playerScore in scoreManager.playerScores)
+        {
+            PlayerScore scoreScript = playerScore.GetComponent<PlayerScore>();
+            if(this.playerID == scoreScript.playerID)
+                return;
+        }
+        scoreManager.playerScores.Add(gameObject);
     }
 
     // Update is called once per frame

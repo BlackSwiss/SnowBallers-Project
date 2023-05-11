@@ -884,6 +884,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a5dd156c-a49b-45ed-ad38-5df2f2db1409",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "bc242731-d17f-4b22-aa06-3988e7cffc87",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
