@@ -267,7 +267,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
+  m_ThrowVelocityScale: 5
   m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
@@ -289,4 +289,5 @@ MonoBehaviour:
   dizzy: {fileID: 2535571729470389673, guid: 35c82bc09d039304a872fc568b0b3615, type: 3}
   initialPos: {x: 0, y: 0, z: 0}
   ownersID: 0
+  owner: {fileID: 0}
   scoreCount: 1
