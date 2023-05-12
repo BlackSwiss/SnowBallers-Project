@@ -6,24 +6,19 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class CinemaManager : MonoBehaviourPun
 {
-    public GameObject mainCamera;
-    public GameObject cinemaCamera;
     public GameObject povCamera;
     public GameObject intro;
     public GameObject outro;
     public bool isMovementActive = true;
     private bool cinemaTracking = false;
+    private GameObject rig;
+    private ActionBasedContinuousMoveProvider moveProvider;
 
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        syncMainCamera();
+        rig = GameObject.Find("XR Origin");
+        moveProvider = GameObject.Find("Locomotion System").GetComponentInChildren<ActionBasedContinuousMoveProvider>();
     }
 
     public void syncPOVCamera(Transform target)
@@ -32,21 +27,11 @@ public class CinemaManager : MonoBehaviourPun
         povCamera.transform.rotation = target.rotation;
     }
 
-    public void syncMainCamera()
-    {
-        if(cinemaTracking)
-        {
-            mainCamera.transform.position = cinemaCamera.transform.position;
-            mainCamera.transform.rotation = cinemaCamera.transform.rotation;
-        }
-    }
-
     [PunRPC]
     public void playIntroCutscene()
     {   
         toggleMovement();
         cinemaTracking = true;
-        cinemaCamera.SetActive(true);
         intro.SetActive(true);
         //Disable cutscene assets once intro is finished.
         Invoke(nameof(disableAllCinema),9);
@@ -64,7 +49,6 @@ public class CinemaManager : MonoBehaviourPun
     {
         toggleMovement();
         cinemaTracking = true;
-        cinemaCamera.SetActive(true);
         outro.SetActive(true);
         //Disable cutscene assets once outro is finished.
         Invoke(nameof(disableAllCinema),4.5f);
@@ -73,16 +57,14 @@ public class CinemaManager : MonoBehaviourPun
     private void disableAllCinema()
     {
         cinemaTracking = false;
-        cinemaCamera.SetActive(false);
         intro.SetActive(false);
         outro.SetActive(false);
+        rig.transform.rotation = povCamera.transform.rotation;
     }
 
     private void toggleMovement()
     {
         isMovementActive = !isMovementActive;
-        GameObject locomotion = GameObject.Find("Locomotion System");
-        ActionBasedContinuousMoveProvider moveProvider = locomotion.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-        moveProvider.enabled = !moveProvider.enabled;
+        moveProvider.enabled = isMovementActive;
     }
 }
