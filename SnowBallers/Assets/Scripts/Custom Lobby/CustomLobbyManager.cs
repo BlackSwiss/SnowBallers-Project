@@ -7,10 +7,10 @@ public class CustomLobbyManager : MonoBehaviour
     public Camera camera;
     public LayerMask viewableLayers;
     public LayerMask ignoreLayers;
+    public GameObject[] stuffToEnable;
+    public GameObject[] stuffToDisable;
     public GameObject customLobbyUI;
-    public GameObject rightHandDirect;
-    public GameObject rightHandRay;
-
+    
     public void enableCustomLobbyUI()
     {
         customLobbyUI.SetActive(true);
@@ -28,16 +28,28 @@ public class CustomLobbyManager : MonoBehaviour
         if(camera.cullingMask != viewableLayers)
         {
             camera.cullingMask = viewableLayers;
-            rightHandDirect.SetActive(false);
-            rightHandRay.SetActive(true);
-            rightHandRay.layer = 15;
+            foreach(GameObject gameObject in stuffToDisable)
+            {
+                gameObject.SetActive(false);
+            }
+            foreach(GameObject gameObject in stuffToEnable)
+            {
+                gameObject.SetActive(true);
+                gameObject.layer = 15;
+            }
         }
         else
         {
             camera.cullingMask = ignoreLayers;
-            rightHandRay.SetActive(false);
-            rightHandDirect.SetActive(true);
-            rightHandRay.layer = 14;
+            foreach(GameObject gameObject in stuffToEnable)
+            {
+                gameObject.SetActive(false);
+                gameObject.layer = 14;
+            }
+            foreach(GameObject gameObject in stuffToDisable)
+            {
+                gameObject.SetActive(true);
+            }
         }
     }
 }

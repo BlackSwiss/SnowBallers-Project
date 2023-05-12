@@ -8,6 +8,8 @@ using Unity.XR.CoreUtils;
 using Photon.Pun;
 using Photon.Realtime;
 
+using UnityEngine.SceneManagement;
+
 public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 {
 
@@ -82,7 +84,8 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
         //Sync POV camera for intro cutscene
         CinemaManager cinemaManager = FindObjectOfType<CinemaManager>();
-        cinemaManager.syncPOVCamera(headRig);
+        if(cinemaManager != null)
+            cinemaManager.syncPOVCamera(headRig);
 
         //Give them an id so we can keep track of score
         spawnedPlayerPrefab.GetComponent<NetworkPlayer>().playerID = PhotonNetwork.LocalPlayer.ActorNumber;
@@ -102,12 +105,18 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         // Have second player start timer setting for all players
         if (PhotonNetwork.CurrentRoom.PlayerCount >= NumPlayersToStartMatch)
         {
-            if(isCustomLobby.Value)
+            Scene scene = SceneManager.GetActiveScene();
+
+            if(isCustomLobby != null && isCustomLobby.Value)
             {
                 if(PhotonNetwork.IsMasterClient)
                 {
                     customLobbyManager.enableCustomLobbyUI();
                 }
+            }
+            else if(scene.name == "Level Design Test")
+            {
+                return;
             }
             else
             {
