@@ -125,7 +125,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         base.OnLeftRoom();
         PhotonNetwork.Destroy(spawnedPlayerPrefab);
-        //PhotonNetwork.Disconnect();
+        PhotonNetwork.Disconnect();
         PhotonNetwork.LoadLevel(0);
         Debug.Log("Left room.");
     }
