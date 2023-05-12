@@ -34,8 +34,8 @@ public class CinemaManager : MonoBehaviourPun
         cinemaTracking = true;
         intro.SetActive(true);
         //Disable cutscene assets once intro is finished.
-        Invoke(nameof(disableAllCinema),9);
-        Invoke(nameof(toggleMovement),9);
+        Invoke(nameof(disableAllCinema),10);
+        Invoke(nameof(toggleMovement),10);
     }
 
     [PunRPC]
@@ -51,7 +51,7 @@ public class CinemaManager : MonoBehaviourPun
         cinemaTracking = true;
         outro.SetActive(true);
         //Disable cutscene assets once outro is finished.
-        Invoke(nameof(disableAllCinema),4.5f);
+        Invoke(nameof(disableAllCinema),5);
     }
 
     private void disableAllCinema()

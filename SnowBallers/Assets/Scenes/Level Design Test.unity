@@ -2365,6 +2365,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1041518729}
     - target: {fileID: 3144133828561523603, guid: 2671c371981ef824787370a97c1479cf, type: 3}
+      propertyPath: moveSpeed
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3144133828561523603, guid: 2671c371981ef824787370a97c1479cf, type: 3}
+      propertyPath: turnSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3144133828561523603, guid: 2671c371981ef824787370a97c1479cf, type: 3}
       propertyPath: hudManager
       value: 
       objectReference: {fileID: 247648522}
